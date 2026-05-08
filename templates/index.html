@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming & Salud Mental — Dashboard Analítico</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/styles.css?v=1">
+</head>
+<body>
+
+<div class="tooltip" id="tooltip"></div>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-badge">Minería de datos · CRISP-DM · 2026 · Jhojan Brausin · Wilder Gutierrez · Fernando Lopez</div>
+  <h1>Gaming & Salud Mental</h1>
+  <p class="header-sub">Análisis de comportamiento de videojuegos e impacto en el bienestar psicológico</p>
+  <div class="header-stats">
+    <div class="hstat"><span class="hstat-val">1,000</span><span class="hstat-label">Registros</span></div>
+    <div class="hstat"><span class="hstat-val">25</span><span class="hstat-label">Variables</span></div>
+    <div class="hstat"><span class="hstat-val">3</span><span class="hstat-label">Modelos</span></div>
+    <div class="hstat"><span class="hstat-val">94.3%</span><span class="hstat-label">R² Regresión</span></div>
+    <div class="hstat"><span class="hstat-val">4</span><span class="hstat-label">Clusters</span></div>
+  </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <button class="nav-btn active"  onclick="showSection('objetivos', this)">Objetivos</button>
+  <button class="nav-btn"         onclick="showSection('overview', this)">Overview</button>
+  <button class="nav-btn"         onclick="showSection('obj1', this)">Obj. 1 — Variables</button>
+  <button class="nav-btn"         onclick="showSection('obj2', this)">Obj. 2 — Clusters</button>
+  <button class="nav-btn"         onclick="showSection('obj3', this)">Obj. 3 — Regresión</button>
+  <button class="nav-btn"         onclick="showSection('predictor', this)">Predictor</button>
+</nav>
+
+<main>
+
+  <!-- ===== OBJETIVOS ===== -->
+  <section id="objetivos" class="section active">
+    <div class="section-header">
+      <div class="section-tag">Fase 1 — Comprensión del negocio · CRISP-DM</div>
+      <div class="section-title">Objetivo General y Específicos</div>
+      <p class="section-desc">Analizar el comportamiento de jugadores de videojuegos y su relación con la salud mental mediante la metodología CRISP-DM y técnicas de minería de datos, identificando patrones de hábitos de juego y estilo de vida que inciden en el riesgo de adicción y las dimensiones de bienestar psicológico.</p>
+    </div>
+
+    <div class="obj-card">
+      <div class="obj-number">01</div>
+      <div class="obj-tag">Objetivo Específico 1</div>
+      <div class="obj-title">Examinar el dataset bajo la metodología CRISP-DM</div>
+      <ul class="meta-list">
+        <li class="meta-item"><span class="meta-dot"></span>Un mayor número de horas diarias de juego <code>daily_gaming_hours</code> se asocia con un nivel de riesgo de adicción más alto</li>
+        <li class="meta-item"><span class="meta-dot"></span>La presencia de síntomas de abstinencia <code>withdrawal_symptoms</code> incrementa la probabilidad de clasificación en riesgo alto</li>
+        <li class="meta-item"><span class="meta-dot"></span>Un menor número de horas de sueño <code>sleep_hours</code> refleja mayor intensidad del hábito y mayor riesgo</li>
+        <li class="meta-item"><span class="meta-dot"></span>Un alto puntaje de aislamiento social <code>social_isolation_score</code> anticipa perfiles de jugadores con riesgo elevado</li>
+      </ul>
+      <span class="result-badge badge-success">✅ Objetivo cumplido — Random Forest 65% exactitud · Correlación &gt; 0.60</span>
+    </div>
+
+    <div class="obj-card">
+      <div class="obj-number">02</div>
+      <div class="obj-tag">Objetivo Específico 2</div>
+      <div class="obj-title">Segmentar jugadores según impacto en salud física y mental</div>
+      <ul class="meta-list">
+        <li class="meta-item"><span class="meta-dot"></span>Los jugadores con mayor <code>daily_gaming_hours</code> y menor <code>sleep_quality</code> presentan mayor <code>social_isolation_score</code></li>
+        <li class="meta-item"><span class="meta-dot"></span>Los jugadores con menor <code>daily_gaming_hours</code> y mayor <code>exercise_hours_weekly</code> presentan mayor <code>face_to_face_social_hours_weekly</code></li>
+        <li class="meta-item"><span class="meta-dot"></span>Los jugadores de mayor edad con más <code>years_gaming</code> presentan un <code>monthly_game_spending_usd</code> diferenciado</li>
+        <li class="meta-item"><span class="meta-dot"></span>Los jugadores con mayor <code>daily_gaming_hours</code> presentan mayor <code>weight_change_kg</code> y <code>mood_swing_frequency</code></li>
+      </ul>
+      <span class="result-badge badge-success">✅ Objetivo cumplido — K-Means k=4 · 4 perfiles diferenciados</span>
+    </div>
+
+    <div class="obj-card">
+      <div class="obj-number">03</div>
+      <div class="obj-tag">Objetivo Específico 3</div>
+      <div class="obj-title">Construir un modelo de regresión para estimar el nivel de riesgo</div>
+      <ul class="meta-list">
+        <li class="meta-item"><span class="meta-dot"></span><code>daily_gaming_hours</code> y <code>withdrawal_symptoms</code> son los predictores con mayor peso</li>
+        <li class="meta-item"><span class="meta-dot"></span>La combinación de <code>loss_of_other_interests</code> y <code>continued_despite_problems</code> mejora la capacidad predictiva</li>
+        <li class="meta-item"><span class="meta-dot"></span>Un bajo valor en <code>sleep_quality</code> junto a alto <code>social_isolation_score</code> contribuye a estimar niveles de riesgo medio y alto</li>
+        <li class="meta-item"><span class="meta-dot"></span>El modelo alcanza un desempeño aceptable medido con R², MAE y RMSE</li>
+      </ul>
+      <span class="result-badge badge-success">✅ Objetivo cumplido — R²=0.9429 · MAE=0.2195 · RMSE=0.2709</span>
+    </div>
+  </section>
+
+  <!-- ===== OVERVIEW ===== -->
+  <section id="overview" class="section">
+    <div class="section-header">
+      <div class="section-tag">Visión general del dataset</div>
+      <div class="section-title">Distribución de Variables Clave</div>
+      <p class="section-desc">Estadísticas descriptivas y distribución de los niveles de riesgo de adicción en los 1,000 jugadores analizados.</p>
+    </div>
+
+    <div class="grid-4" style="margin-bottom:1.5rem">
+      <div class="kpi-card">
+        <span class="kpi-label">Horas de juego / día</span>
+        <span class="kpi-value" style="color:var(--accent)">6.15</span>
+        <span class="kpi-sub">Promedio · Máx 15.1h</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Horas de sueño / noche</span>
+        <span class="kpi-value" style="color:var(--accent3)">5.74</span>
+        <span class="kpi-sub">Promedio · Min 3.0h</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Aislamiento social</span>
+        <span class="kpi-value" style="color:var(--accent2)">3.87</span>
+        <span class="kpi-sub">Promedio · Escala 1-10</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Gasto mensual USD</span>
+        <span class="kpi-value" style="color:var(--purple)">$105</span>
+        <span class="kpi-sub">Promedio · Máx $499</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Distribución — Nivel de Riesgo de Adicción</div>
+        <div id="chart-risk-dist" style="height:220px"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Distribución — Horas Diarias de Juego</div>
+        <div id="chart-hours-dist" style="height:220px"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Género de Videojuego</div>
+        <div id="chart-genre" style="height:220px"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Plataforma de Juego</div>
+        <div id="chart-platform" style="height:220px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OBJ 1 ===== -->
+  <section id="obj1" class="section">
+    <div class="section-header">
+      <div class="section-tag">Objetivo 1 · Random Forest + Correlación</div>
+      <div class="section-title">Identificar Variables Influyentes en el Riesgo de Adicción</div>
+      <p class="section-desc">Análisis de la importancia relativa de cada variable y su correlación con el nivel de riesgo de adicción mediante Random Forest y matriz de correlación.</p>
+    </div>
+
+    <div class="grid-4" style="margin-bottom:1.5rem">
+      <div class="kpi-card">
+        <span class="kpi-label">Exactitud Random Forest</span>
+        <span class="kpi-value" style="color:var(--accent)">65%</span>
+        <span class="kpi-sub">Con 4 variables · 200 test</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">daily_gaming_hours</span>
+        <span class="kpi-value" style="color:var(--accent2)">53%</span>
+        <span class="kpi-sub">Importancia relativa</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Correlación máx.</span>
+        <span class="kpi-value" style="color:var(--accent3)">0.81</span>
+        <span class="kpi-sub">daily_gaming_hours ↔ riesgo</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">sleep_hours ↔ riesgo</span>
+        <span class="kpi-value" style="color:var(--danger)">-0.61</span>
+        <span class="kpi-sub">Correlación negativa</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Importancia de Variables — Random Forest</div>
+        <div id="chart-importance"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Correlación con Nivel de Riesgo</div>
+        <div id="chart-corr-bars"></div>
+      </div>
+      <div class="card col-span-2">
+        <div class="card-title">Heatmap de Correlación — Variables del Objetivo 1</div>
+        <div id="chart-heatmap"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OBJ 2 ===== -->
+  <section id="obj2" class="section">
+    <div class="section-header">
+      <div class="section-tag">Objetivo 2 · K-Means Clustering · k=4</div>
+      <div class="section-title">Segmentación de Jugadores por Salud Física y Mental</div>
+      <p class="section-desc">Cuatro perfiles diferenciados identificados mediante K-Means. La selección de k=4 se justifica por la coherencia contextual con las categorías de riesgo.</p>
+    </div>
+
+    <div class="cluster-grid" style="margin-bottom:1.5rem">
+      <div class="cluster-card">
+        <span class="cluster-badge" style="background:rgba(104,211,145,0.15);color:var(--low)">Cluster 0</span>
+        <div class="cluster-name">Jugador Joven Casual y Saludable</div>
+        <div class="cluster-stats">
+          <div class="cstat"><span class="cstat-label">Horas juego/día</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:27%;background:var(--low)"></div></div><span class="cstat-val">4.14h</span></div>
+          <div class="cstat"><span class="cstat-label">Ejercicio/semana</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:73%;background:var(--low)"></div></div><span class="cstat-val">8.00h</span></div>
+          <div class="cstat"><span class="cstat-label">Aislamiento social</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:25%;background:var(--low)"></div></div><span class="cstat-val">2.50</span></div>
+          <div class="cstat"><span class="cstat-label">Riesgo promedio</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:2%;background:var(--low)"></div></div><span class="cstat-val" style="color:var(--low)">0.02 Low</span></div>
+        </div>
+      </div>
+      <div class="cluster-card">
+        <span class="cluster-badge" style="background:rgba(246,173,85,0.15);color:var(--moderate)">Cluster 1</span>
+        <div class="cluster-name">Jugador Intermedio con Señales de Deterioro</div>
+        <div class="cluster-stats">
+          <div class="cstat"><span class="cstat-label">Horas juego/día</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:50%;background:var(--moderate)"></div></div><span class="cstat-val">7.53h</span></div>
+          <div class="cstat"><span class="cstat-label">Ejercicio/semana</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:57%;background:var(--moderate)"></div></div><span class="cstat-val">6.23h</span></div>
+          <div class="cstat"><span class="cstat-label">Aislamiento social</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:48%;background:var(--moderate)"></div></div><span class="cstat-val">4.78</span></div>
+          <div class="cstat"><span class="cstat-label">Riesgo promedio</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:34%;background:var(--moderate)"></div></div><span class="cstat-val" style="color:var(--moderate)">1.03 Moderate</span></div>
+        </div>
+      </div>
+      <div class="cluster-card">
+        <span class="cluster-badge" style="background:rgba(99,179,237,0.15);color:var(--accent)">Cluster 2</span>
+        <div class="cluster-name">Jugador Veterano Estable</div>
+        <div class="cluster-stats">
+          <div class="cstat"><span class="cstat-label">Horas juego/día</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:28%;background:var(--accent)"></div></div><span class="cstat-val">4.16h</span></div>
+          <div class="cstat"><span class="cstat-label">Años jugando</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:80%;background:var(--accent)"></div></div><span class="cstat-val">10.95 años</span></div>
+          <div class="cstat"><span class="cstat-label">Aislamiento social</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:26%;background:var(--accent)"></div></div><span class="cstat-val">2.60</span></div>
+          <div class="cstat"><span class="cstat-label">Riesgo promedio</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:2%;background:var(--accent)"></div></div><span class="cstat-val" style="color:var(--accent)">0.01 Low</span></div>
+        </div>
+      </div>
+      <div class="cluster-card">
+        <span class="cluster-badge" style="background:rgba(252,129,129,0.15);color:var(--danger)">Cluster 3</span>
+        <div class="cluster-name">Jugador de Alto Riesgo — Deterioro Severo</div>
+        <div class="cluster-stats">
+          <div class="cstat"><span class="cstat-label">Horas juego/día</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:71%;background:var(--danger)"></div></div><span class="cstat-val">10.71h</span></div>
+          <div class="cstat"><span class="cstat-label">Ejercicio/semana</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:43%;background:var(--danger)"></div></div><span class="cstat-val">4.71h</span></div>
+          <div class="cstat"><span class="cstat-label">Aislamiento social</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:70%;background:var(--danger)"></div></div><span class="cstat-val">6.96</span></div>
+          <div class="cstat"><span class="cstat-label">Riesgo promedio</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:84%;background:var(--danger)"></div></div><span class="cstat-val" style="color:var(--danger)">2.51 High-Severe</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Comparación de Centroides por Variable</div>
+      <div id="chart-clusters"></div>
+    </div>
+  </section>
+
+  <!-- ===== OBJ 3 ===== -->
+  <section id="obj3" class="section">
+    <div class="section-header">
+      <div class="section-tag">Objetivo 3 · Regresión Lineal Múltiple</div>
+      <div class="section-title">Estimación del Nivel de Riesgo de Adicción</div>
+      <p class="section-desc">Modelo de regresión lineal entrenado con 6 variables predictoras sobre 800 registros y evaluado sobre 200 registros de prueba.</p>
+    </div>
+
+    <div class="grid-4" style="margin-bottom:1.5rem">
+      <div class="kpi-card">
+        <span class="kpi-label">R² Score</span>
+        <span class="kpi-value" style="color:var(--accent3)">0.9429</span>
+        <span class="kpi-sub">Variabilidad explicada: 94.29%</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">MAE</span>
+        <span class="kpi-value" style="color:var(--accent)">0.2195</span>
+        <span class="kpi-sub">Error promedio absoluto</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">RMSE</span>
+        <span class="kpi-value" style="color:var(--accent2)">0.2709</span>
+        <span class="kpi-sub">Raíz error cuadrático medio</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Mejor predictor</span>
+        <span class="kpi-value" style="color:var(--purple);font-size:1rem">withdrawal</span>
+        <span class="kpi-sub">Coeficiente: 0.988</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Coeficientes del Modelo de Regresión</div>
+        <div id="chart-coef"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Comparación de Coeficientes</div>
+        <div id="chart-coef-compare"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PREDICTOR ===== -->
+  <section id="predictor" class="section">
+    <div class="section-header">
+      <div class="section-tag">Despliegue · Herramienta interactiva</div>
+      <div class="section-title">Predictor de Riesgo de Adicción</div>
+      <p class="section-desc">Ingresa tus datos para estimar tu nivel de riesgo de adicción a los videojuegos. Los resultados son orientativos y no reemplazan una evaluación profesional.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Ingresa tus datos</div>
+        <div class="predictor-form">
+          <div class="form-group">
+            <label class="form-label">Horas diarias de juego</label>
+            <input class="form-input" id="p-hours" type="number" min="0.5" max="15" step="0.5" placeholder="ej: 5.5" oninput="validateNum(this,0.5,15)">
+            <span class="form-hint">Rango: 0.5 — 15 horas</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Calidad del sueño</label>
+            <select class="form-select" id="p-sleep">
+              <option value="">Selecciona...</option>
+              <option value="0">0 — Muy mala</option>
+              <option value="1">1 — Mala</option>
+              <option value="2">2 — Regular</option>
+              <option value="3">3 — Buena</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">¿Síntomas de abstinencia?</label>
+            <select class="form-select" id="p-withdrawal">
+              <option value="">Selecciona...</option>
+              <option value="0">0 — No</option>
+              <option value="1">1 — Sí</option>
+            </select>
+            <span class="form-hint">Irritabilidad al no poder jugar</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">¿Pérdida de otros intereses?</label>
+            <select class="form-select" id="p-loss">
+              <option value="">Selecciona...</option>
+              <option value="0">0 — No</option>
+              <option value="1">1 — Sí</option>
+            </select>
+            <span class="form-hint">Dejaste actividades que antes disfrutabas</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">¿Continúas a pesar de problemas?</label>
+            <select class="form-select" id="p-continued">
+              <option value="">Selecciona...</option>
+              <option value="0">0 — No</option>
+              <option value="1">1 — Sí</option>
+            </select>
+            <span class="form-hint">Sigues jugando pese a consecuencias negativas</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Aislamiento social (1-10)</label>
+            <input class="form-input" id="p-isolation" type="number" min="1" max="10" step="1" placeholder="ej: 4" oninput="validateNum(this,1,10)">
+            <span class="form-hint">1 = nada aislado · 10 = totalmente aislado</span>
+          </div>
+        </div>
+        <button class="predict-btn" onclick="predict()">Calcular nivel de riesgo</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Resultado de la Predicción</div>
+        <div id="result-panel" class="result-panel">
+          <div id="result-level" class="result-level"></div>
+          <div id="result-score" class="result-score"></div>
+          <div class="risk-meter">
+            <div class="risk-bar-bg">
+              <div id="risk-fill" class="risk-bar-fill"></div>
+            </div>
+            <div class="risk-labels">
+              <span>Low</span><span>Moderate</span><span>High</span><span>Severe</span>
+            </div>
+          </div>
+          <div id="result-msg" class="result-msg"></div>
+          <div class="metrics-row">
+            <div class="metric-chip"><div class="metric-chip-val">0.9429</div><div class="metric-chip-label">R²</div></div>
+            <div class="metric-chip"><div class="metric-chip-val">0.2195</div><div class="metric-chip-label">MAE</div></div>
+            <div class="metric-chip"><div class="metric-chip-val">0.2709</div><div class="metric-chip-label">RMSE</div></div>
+            <div class="metric-chip"><div class="metric-chip-val">94.29%</div><div class="metric-chip-label">Precisión</div></div>
+          </div>
+          <p style="font-size:0.65rem;color:var(--text3);margin-top:0.8rem;line-height:1.5">⚠️ Esta predicción es orientativa. No reemplaza una evaluación profesional en salud mental. Modelo entrenado con 1,000 jugadores.</p>
+        </div>
+        <div id="result-empty" style="padding:3rem;text-align:center;color:var(--text3);font-size:0.8rem">
+          Completa el formulario y presiona<br>"Calcular nivel de riesgo" para ver el resultado.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/static/scripts.js?v=1"></script>
+</body>
+</html>
