@@ -12,29 +12,100 @@
 
 <div class="tooltip" id="tooltip"></div>
 
-<!-- ===== HEADER ===== -->
-<header>
-  <div class="header-badge">Minería de datos · CRISP-DM · 2026 · Jhojan Brausin · Wilder Gutierrez · Fernando Lopez</div>
-  <h1>Gaming & Salud Mental</h1>
-  <p class="header-sub">Análisis de comportamiento de videojuegos e impacto en el bienestar psicológico</p>
-  <div class="header-stats">
-    <div class="hstat"><span class="hstat-val">1,000</span><span class="hstat-label">Registros</span></div>
-    <div class="hstat"><span class="hstat-val">25</span><span class="hstat-label">Variables</span></div>
-    <div class="hstat"><span class="hstat-val">3</span><span class="hstat-label">Modelos</span></div>
-    <div class="hstat"><span class="hstat-val">94.3%</span><span class="hstat-label">R² Regresión</span></div>
-    <div class="hstat"><span class="hstat-val">4</span><span class="hstat-label">Clusters</span></div>
-  </div>
-</header>
+<div class="layout">
 
-<!-- ===== NAV ===== -->
-<nav>
-  <button class="nav-btn active"  onclick="showSection('objetivos', this)">Objetivos</button>
-  <button class="nav-btn"         onclick="showSection('overview', this)">Overview</button>
-  <button class="nav-btn"         onclick="showSection('obj1', this)">Obj. 1 — Variables</button>
-  <button class="nav-btn"         onclick="showSection('obj2', this)">Obj. 2 — Clusters</button>
-  <button class="nav-btn"         onclick="showSection('obj3', this)">Obj. 3 — Regresión</button>
-  <button class="nav-btn"         onclick="showSection('predictor', this)">Predictor</button>
-</nav>
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <div class="logo-circle">G</div>
+
+            <div>
+                <div class="logo-title">Gaming & IA</div>
+                <div class="logo-sub">Dashboard Analítico</div>
+            </div>
+
+        </div>
+
+        <div class="sidebar-menu">
+
+            <button class="nav-btn active" onclick="showSection('objetivos', this)">
+                📌 Objetivos
+            </button>
+
+            <button class="nav-btn" onclick="showSection('overview', this)">
+                📊 Overview
+            </button>
+
+            <button class="nav-btn" onclick="showSection('obj1', this)">
+                📈 Obj. 1 — Variables
+            </button>
+
+            <button class="nav-btn" onclick="showSection('obj2', this)">
+                🧠 Obj. 2 — Clusters
+            </button>
+
+            <button class="nav-btn" onclick="showSection('obj3', this)">
+                🤖 Obj. 3 — Regresión
+            </button>
+
+            <button class="nav-btn" onclick="showSection('predictor', this)">
+                🎮 Predictor
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- ===== CONTENT ===== -->
+    <div class="content-area">
+
+        <!-- ===== HEADER ===== -->
+        <header>
+
+            <div class="header-badge">
+                Minería de datos · CRISP-DM · 2026 · Jhojan Brausin ·
+                Wilder Gutierrez · Fernando Lopez
+            </div>
+
+            <h1>Gaming & Salud Mental</h1>
+
+            <p class="header-sub">
+                Análisis de comportamiento de videojuegos e impacto
+                en el bienestar psicológico
+            </p>
+
+            <div class="header-stats">
+
+                <div class="hstat">
+                    <span class="hstat-val">1,000</span>
+                    <span class="hstat-label">Registros</span>
+                </div>
+
+                <div class="hstat">
+                    <span class="hstat-val">25</span>
+                    <span class="hstat-label">Variables</span>
+                </div>
+
+                <div class="hstat">
+                    <span class="hstat-val">3</span>
+                    <span class="hstat-label">Modelos</span>
+                </div>
+
+                <div class="hstat">
+                    <span class="hstat-val">94.3%</span>
+                    <span class="hstat-label">R² Regresión</span>
+                </div>
+
+                <div class="hstat">
+                    <span class="hstat-val">4</span>
+                    <span class="hstat-label">Clusters</span>
+                </div>
+
+            </div>
+
+        </header>
 
 <main>
 
@@ -376,8 +447,12 @@
     </div>
   </section>
 
-</main>
+        </main>
+
+    </div>
+
+</div>
 
 <script src="/static/scripts.js?v=1"></script>
+
 </body>
-</html>

@@ -1,16 +1,45 @@
 // ============================================================
 // NAVIGATION
 // ============================================================
+
+
 function showSection(id, btn) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
-    if (id === 'overview') renderOverview();
-    if (id === 'obj1') renderObj1();
-    if (id === 'obj2') renderObj2();
-    if (id === 'obj3') renderObj3();
+
+    document.querySelectorAll('.section')
+        .forEach(s => s.classList.remove('active'));
+
+    document.querySelectorAll('.nav-btn')
+        .forEach(b => b.classList.remove('active'));
+
+    document.getElementById(id)
+        .classList.add('active');
+
+    if (btn) {
+        btn.classList.add('active');
+    }
+
+    setTimeout(() => {
+
+        if (id === 'overview') renderOverview();
+
+        if (id === 'obj1') renderObj1();
+
+        if (id === 'obj2') renderObj2();
+
+        if (id === 'obj3') renderObj3();
+
+    }, 50);
 }
+
+// ============================================================
+// INIT
+// ============================================================
+
+window.onload = () => {
+
+    renderOverview();
+
+};
 
 // ============================================================
 // DATA
