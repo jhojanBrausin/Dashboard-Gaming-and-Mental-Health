@@ -1,6 +1,7 @@
 // ============================================================
 // NAVIGATION
 // ============================================================
+
 function showSection(id, btn) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -15,29 +16,137 @@ function showSection(id, btn) {
 // ============================================================
 // DATA
 // ============================================================
-const riskDist = [
-    { label: 'Low',      value: 514, color: '#68d391' },
-    { label: 'Moderate', value: 190, color: '#f6ad55' },
-    { label: 'High',     value: 154, color: '#fc8181' },
-    { label: 'Severe',   value: 142, color: '#b794f4' }
-];
+let dataset = [];
 
-const genreData = [
-    { label: 'MOBA',         value: 156 },
-    { label: 'RPG',          value: 146 },
-    { label: 'MMO',          value: 143 },
-    { label: 'Battle Royale',value: 141 },
-    { label: 'Strategy',     value: 141 },
-    { label: 'Mobile',       value: 139 },
-    { label: 'FPS',          value: 134 }
-];
+d3.csv('/static/gaming_mental_health.csv')
+.then(data => {
+    console.log(data[0]);
+    console.log(dataset[0]);
+    dataset = data.map(d => ({
 
-const platformData = [
-    { label: 'Mobile',         value: 262 },
-    { label: 'Multi-platform', value: 260 },
-    { label: 'PC',             value: 241 },
-    { label: 'Console',        value: 237 }
-];
+        // =========================
+        // VARIABLES PRINCIPALES
+        // =========================
+        risk:
+            d.gaming_addiction_risk_level?.trim(),
+
+        genre:
+            d.game_genre?.trim(),
+
+        platform:
+            d.gaming_platform?.trim(),
+
+        hours:
+            +d.daily_gaming_hours,
+
+        withdrawal:
+            d.withdrawal_symptoms?.trim(),
+
+        isolation:
+            +d.social_isolation_score,
+
+        sleep:
+            +d.sleep_hours,
+
+        spending:
+            +d.monthly_game_spending_usd,
+
+        age:
+            +d.age
+    }));
+
+    console.log(dataset);
+    console.log(buildRiskData());
+    console.log(buildPlatformData());
+
+    renderKPIs();
+    renderOverview();
+});
+
+function buildRiskData() {
+
+    const counts = d3.rollup(
+        dataset,
+        v => v.length,
+        d => d.risk
+    );
+
+    // Orden fijo deseado
+    const order = [
+        'Low',
+        'Moderate',
+        'High',
+        'Severe'
+    ];
+
+    const colors = {
+        Low: '#10b981',
+        Moderate: '#e4d830',
+        High: '#f56a33',
+        Severe: '#fa2828'
+    };
+
+    return order.map(label => ({
+
+        label,
+
+        value:
+            counts.get(label) || 0,
+
+        color:
+            colors[label]
+    }));
+}
+
+function buildPlatformData() {
+
+    const counts = d3.rollup(
+        dataset,
+        v => v.length,
+        d => d.platform
+    );
+
+    return Array.from(
+        counts,
+        ([label, value]) => ({
+            label,
+            value
+        })
+    );
+}
+
+
+// ↑ Datos reales del dataset (Gaming and Mental Health.csv)
+
+// Datos reales del dataset — game_genre value_counts()
+function buildGenreData() {
+
+    const counts = d3.rollup(
+        dataset,
+        v => v.length,
+        d => d.genre
+    );
+
+    return Array.from(counts, ([label, value]) => ({
+        label,
+        value
+    }))
+    .sort((a,b) => b.value - a.value);
+}
+
+function buildPlatformData() {
+
+    const counts = d3.rollup(
+        dataset,
+        v => v.length,
+        d => d.platform
+    );
+
+    return Array.from(counts, ([label, value]) => ({
+        label,
+        value
+    }));
+}
 
 const importanceData = [
     { label: 'daily_gaming_hours',    value: 0.53, color: '#f6ad55' },
@@ -98,10 +207,93 @@ function hideTip() { tooltip.style.opacity = 0; }
 // OVERVIEW
 // ============================================================
 function renderOverview() {
-    renderBarChart('#chart-risk-dist', riskDist, d => d.value, d => d.label, d => d.color, 'Jugadores');
-    renderHistogram('#chart-hours-dist');
-    renderIsolationHistogram('#chart-genre');
-    renderDonut('#chart-platform', platformData);
+
+    renderBarChart(
+        '#chart-risk-dist',
+        buildRiskData()
+    );
+
+    renderHistogram(
+        '#chart-hours-dist'
+    );
+
+    renderIsolationHistogram(
+        '#chart-genre'
+    );
+
+    renderDonut(
+        '#chart-platform',
+        buildPlatformData()
+    );
+}
+
+
+function renderKPIs() {
+
+    // ====================================================
+    // PROMEDIOS
+    // ====================================================
+
+    const avgHours =
+        d3.mean(dataset, d => d.hours);
+
+    const avgSleep =
+        d3.mean(dataset, d => d.sleep);
+
+    const avgIsolation =
+        d3.mean(dataset, d => d.isolation);
+
+    const avgSpending =
+        d3.mean(dataset, d => d.spending);
+
+    // ====================================================
+    // MAX / MIN
+    // ====================================================
+
+    const maxHours =
+        d3.max(dataset, d => d.hours);
+
+    const minSleep =
+        d3.min(dataset, d => d.sleep);
+
+    const maxSpending =
+        d3.max(dataset, d => d.spending);
+
+    // ====================================================
+    // ACTUALIZAR HTML
+    // ====================================================
+
+    document.getElementById('kpi-hours').innerHTML = `
+        ${avgHours.toFixed(2)}
+    `;
+
+    document.getElementById('kpi-hours-sub').innerHTML = `
+        Average · Max ${maxHours.toFixed(1)}h
+    `;
+
+    document.getElementById('kpi-sleep').innerHTML = `
+        ${avgSleep.toFixed(2)}
+    `;
+
+    document.getElementById('kpi-sleep-sub').innerHTML = `
+        Average · Min ${minSleep.toFixed(1)}h
+    `;
+
+    document.getElementById('kpi-isolation').innerHTML = `
+        ${avgIsolation.toFixed(2)}
+    `;
+
+    document.getElementById('kpi-isolation-sub').innerHTML = `
+        Average · Scale 1-10
+    `;
+
+    document.getElementById('kpi-spending').innerHTML = `
+        $${avgSpending.toFixed(0)}
+    `;
+
+    document.getElementById('kpi-spending-sub').innerHTML = `
+        Average · Max $499
+    `;
 }
 
 function renderBarChart(container, data) {
@@ -341,61 +533,24 @@ function renderHistogram(selector) {
     // DATA
     // ====================================================
 
-const data = [
-    { hour: 0.5, value: 14 },
-    { hour: 1.0, value: 14 },
-    { hour: 1.5, value: 13 },
-    { hour: 2.0, value: 24 },
-    { hour: 2.5, value: 17 },
-    { hour: 3.0, value: 24 },
-    { hour: 3.5, value: 21 },
+const bins = d3.bin()
+    .domain([0, 15])
+    .thresholds(30)
+    (
+        dataset
+        .map(d => d.hours)
+        .filter(d => !isNaN(d))
+    );
 
-    { hour: 4.0, value: 38 },
-    { hour: 4.3, value: 41 },
-    { hour: 4.6, value: 24 },
+const data = bins.map(bin => ({
 
-    { hour: 5.0, value: 38 },
-    { hour: 5.3, value: 54 },
-    { hour: 5.6, value: 41 },
+    hour:
+        (bin.x0 + bin.x1) / 2,
 
-    { hour: 6.0, value: 48 },
-    { hour: 6.3, value: 36 },
-    { hour: 6.6, value: 61 },
+    value:
+        bin.length
+}));
 
-    { hour: 7.0, value: 53 },
-    { hour: 7.3, value: 45 },
-    { hour: 7.6, value: 26 },
-
-    { hour: 8.0, value: 47 },
-    { hour: 8.3, value: 32 },
-    { hour: 8.6, value: 22 },
-
-    { hour: 9.0, value: 37 },
-    { hour: 9.3, value: 28 },
-    { hour: 9.6, value: 30 },
-
-    { hour: 10.0, value: 10 },
-    { hour: 10.3, value: 34 },
-    { hour: 10.6, value: 11 },
-
-    { hour: 11.0, value: 13 },
-    { hour: 11.3, value: 22 },
-    { hour: 11.6, value: 9 },
-
-    { hour: 12.0, value: 14 },
-    { hour: 12.3, value: 12 },
-    { hour: 12.6, value: 8 },
-
-    { hour: 13.0, value: 10 },
-    { hour: 13.3, value: 8 },
-    { hour: 13.6, value: 8 },
-
-    { hour: 14.0, value: 4 },
-    { hour: 14.3, value: 3 },
-    { hour: 14.6, value: 2 },
-
-    { hour: 15.0, value: 3 }
-];
 
     // ====================================================
     // SVG
@@ -422,7 +577,7 @@ const data = [
         .range([0, w]);
 
     const y = d3.scaleLinear()
-        .domain([0, 50])
+        .domain([0, d3.max(data, d => d.value) * 1.1])
         .range([h, 0]);
 
     // ====================================================
@@ -594,18 +749,20 @@ function renderIsolationHistogram(selector) {
     // DATA (SUMA = 1000)
     // ====================================================
 
-    const data = [
-        { score: 1, value: 155 },
-        { score: 2, value: 130 },
-        { score: 3, value: 190 },
-        { score: 4, value: 160 },
-        { score: 5, value: 155 },
-        { score: 6, value: 105 },
-        { score: 7, value: 50 },
-        { score: 8, value: 30 },
-        { score: 9, value: 15 },
-        { score: 10, value: 10 }
-    ];
+    // Datos reales del dataset — social_isolation_score value_counts()
+const counts = d3.rollup(
+    dataset,
+    v => v.length,
+    d => d.isolation
+);
+
+const data = Array.from(
+    counts,
+    ([score, value]) => ({
+        score: +score,
+        value
+    })
+).sort((a,b) => a.score - b.score);
 
     // ====================================================
     // SVG
@@ -633,7 +790,7 @@ function renderIsolationHistogram(selector) {
         .padding(0.08);
 
     const y = d3.scaleLinear()
-        .domain([0, 200])
+        .domain([0, d3.max(data, d => d.value) * 1.1])
         .range([h, 0]);
 
     // ====================================================
@@ -716,7 +873,7 @@ function renderIsolationHistogram(selector) {
         )
         .attr(
             'y',
-            d => y(d.value) - 8
+            d => y(d.value) - 2
         )
         .attr('text-anchor', 'middle')
         .attr('fill', '#64748b')
@@ -854,6 +1011,946 @@ function renderObj1() {
     renderImpChart();
     renderCorrBars();
     renderHeatmap();
+    renderViolinPlot('#preview-violin');
+    renderWithdrawalChart('#preview-withdrawal');
+    renderBoxplot('#preview-boxplot');
+    renderGamingIsolationBoxplot('#preview-gaming-isolation');
+}
+
+function renderGamingIsolationBoxplot(selector){
+
+    const isPreview =
+    selector.includes('preview');
+
+    const el = document.querySelector(selector);
+
+    if(!el) return;
+
+    el.innerHTML = '';
+
+    // ====================================================
+    // DIMENSIONES
+    // ====================================================
+
+    const W = el.clientWidth || 920;
+    const H =
+    isPreview ? 220 : 430;
+
+    const margin = {
+        top: 30,
+        right: 30,
+        bottom: 70,
+        left: 70
+    };
+
+    const w = W - margin.left - margin.right;
+    const h = H - margin.top - margin.bottom;
+
+    // ====================================================
+    // SVG
+    // ====================================================
+
+    const svg = d3.select(selector)
+        .append('svg')
+        .attr('viewBox', `0 0 ${W} ${H}`);
+
+    const g = svg.append('g')
+        .attr(
+            'transform',
+            `translate(${margin.left},${margin.top})`
+        );
+
+    // ====================================================
+    // CATEGORÍAS
+    // ====================================================
+
+    function isolationLevel(v){
+
+        if(v <= 3) return 'Low';
+
+        if(v <= 5) return 'Moderate';
+
+        if(v <= 7) return 'High';
+
+        return 'Extreme';
+    }
+
+    const order = [
+
+        'Low',
+
+        'Moderate',
+
+        'High',
+
+        'Extreme'
+    ];
+
+    // ====================================================
+    // DATA
+    // ====================================================
+
+    const grouped = order.map(level => {
+
+        const values = dataset
+
+            .filter(
+                d =>
+                    isolationLevel(d.isolation) === level
+            )
+
+            .map(d => d.hours)
+
+            .sort(d3.ascending);
+
+        return {
+
+            level,
+
+            values,
+
+            q1:
+                d3.quantile(values, 0.25),
+
+            median:
+                d3.quantile(values, 0.5),
+
+            q3:
+                d3.quantile(values, 0.75),
+
+            min:
+                d3.min(values),
+
+            max:
+                d3.max(values)
+        };
+    });
+
+    // ====================================================
+    // ESCALAS
+    // ====================================================
+
+    const x = d3.scaleBand()
+        .domain(order)
+        .range([0, w])
+        .padding(0.35);
+
+    const y = d3.scaleLinear()
+        .domain([0, 15])
+        .range([h, 0]);
+
+    // ====================================================
+    // GRID
+    // ====================================================
+
+    g.append('g')
+        .attr('class','grid')
+        .call(
+            d3.axisLeft(y)
+            .tickSize(-w)
+            .tickFormat('')
+        )
+        .selectAll('line')
+        .attr('stroke','#e2e8f0');
+
+    // ====================================================
+    // AXIS
+    // ====================================================
+
+    g.append('g')
+        .attr(
+            'transform',
+            `translate(0,${h})`
+        )
+        .call(d3.axisBottom(x));
+
+    g.append('g')
+        .call(d3.axisLeft(y));
+
+    // ====================================================
+    // COLORES
+    // ====================================================
+
+    const colors = {
+
+        'Low': '#10b981',
+
+        'Moderate': '#eab308',
+
+        'High': '#f97316',
+
+        'Extreme': '#ef4444'
+    };
+
+    // ====================================================
+    // BOXPLOTS
+    // ====================================================
+
+    grouped.forEach(group => {
+
+        const center =
+            x(group.level) + x.bandwidth()/2;
+
+        // whisker
+
+        g.append('line')
+            .attr('x1', center)
+            .attr('x2', center)
+            .attr('y1', y(group.min))
+            .attr('y2', y(group.max))
+            .attr('stroke','#475569')
+            .attr('stroke-width',2);
+
+        // box
+
+        g.append('rect')
+
+            .attr(
+                'x',
+                x(group.level)
+            )
+
+            .attr(
+                'y',
+                y(group.q3)
+            )
+
+            .attr(
+                'width',
+                x.bandwidth()
+            )
+
+            .attr(
+                'height',
+                y(group.q1) - y(group.q3)
+            )
+
+            .attr('rx',8)
+
+            .attr(
+                'fill',
+                colors[group.level]
+            )
+
+            .attr('opacity',1)
+
+            .style(
+                'filter',
+                'drop-shadow(0 2px 5px rgba(0,0,0,0.08))'
+            );
+
+        // median
+
+        g.append('line')
+
+            .attr(
+                'x1',
+                x(group.level)
+            )
+
+            .attr(
+                'x2',
+                x(group.level) + x.bandwidth()
+            )
+
+            .attr(
+                'y1',
+                y(group.median)
+            )
+
+            .attr(
+                'y2',
+                y(group.median)
+            )
+
+            .attr('stroke','#0f172a')
+
+            .attr('stroke-width',3);
+
+        // top cap
+
+        g.append('line')
+
+            .attr('x1', center - 24)
+            .attr('x2', center + 24)
+
+            .attr(
+                'y1',
+                y(group.max)
+            )
+
+            .attr(
+                'y2',
+                y(group.max)
+            )
+
+            .attr('stroke','#475569')
+
+            .attr('stroke-width',2);
+
+        // bottom cap
+
+        g.append('line')
+
+            .attr('x1', center - 24)
+            .attr('x2', center + 24)
+
+            .attr(
+                'y1',
+                y(group.min)
+            )
+
+            .attr(
+                'y2',
+                y(group.min)
+            )
+
+            .attr('stroke','#475569')
+
+            .attr('stroke-width',2);
+    });
+
+    // ====================================================
+    // LABEL Y
+    // ====================================================
+
+    svg.append('text')
+
+        .attr(
+            'transform',
+            `translate(22,${H/2}) rotate(-90)`
+        )
+
+        .attr('text-anchor','middle')
+
+        .attr('fill','#475569')
+
+        .attr('font-size',14)
+
+        .attr('font-weight',600)
+
+        .text('Daily Gaming Hours');
+
+    // ====================================================
+    // LABEL X
+    // ====================================================
+
+    svg.append('text')
+
+        .attr('x', W/2)
+
+        .attr('y', H-12)
+
+        .attr('text-anchor','middle')
+
+        .attr('fill','#475569')
+
+        .attr('font-size',14)
+
+        .attr('font-weight',600)
+
+        .text('Social Isolation Level');
+}
+
+function renderBoxplot(selector){
+
+    const isPreview =
+    selector.includes('preview');
+
+    const el = document.querySelector(selector);
+
+    if(!el) return;
+
+    el.innerHTML = '';
+
+    // ====================================================
+    // DIMENSIONES
+    // ====================================================
+
+    const W = el.clientWidth || 900;
+    const H =
+    isPreview ? 220 : 430;
+
+    const margin = {
+        top: 30,
+        right: 30,
+        bottom: 70,
+        left: 70
+    };
+
+    const w = W - margin.left - margin.right;
+    const h = H - margin.top - margin.bottom;
+
+    // ====================================================
+    // SVG
+    // ====================================================
+
+    const svg = d3.select(selector)
+        .append('svg')
+        .attr('viewBox', `0 0 ${W} ${H}`);
+
+    const g = svg.append('g')
+        .attr(
+            'transform',
+            `translate(${margin.left},${margin.top})`
+        );
+
+    // ====================================================
+    // ORDEN
+    // ====================================================
+
+    const order = [
+        'Low',
+        'Moderate',
+        'High',
+        'Severe'
+    ];
+
+    // ====================================================
+    // DATA
+    // ====================================================
+
+    const grouped = order.map(level => {
+
+        const values = dataset
+
+            .filter(d => d.risk === level)
+
+            .map(d => d.isolation)
+
+            .sort(d3.ascending);
+
+        return {
+
+            level,
+
+            values,
+
+            q1:
+                d3.quantile(values, 0.25),
+
+            median:
+                d3.quantile(values, 0.5),
+
+            q3:
+                d3.quantile(values, 0.75),
+
+            min:
+                d3.min(values),
+
+            max:
+                d3.max(values)
+        };
+    });
+
+    // ====================================================
+    // ESCALAS
+    // ====================================================
+
+    const x = d3.scaleBand()
+        .domain(order)
+        .range([0, w])
+        .padding(0.35);
+
+    const y = d3.scaleLinear()
+        .domain([0, 10])
+        .range([h, 0]);
+
+    // ====================================================
+    // GRID
+    // ====================================================
+
+    g.append('g')
+        .attr('class','grid')
+        .call(
+            d3.axisLeft(y)
+            .tickSize(-w)
+            .tickFormat('')
+        )
+        .selectAll('line')
+        .attr('stroke','#e2e8f0');
+
+    // ====================================================
+    // AXIS
+    // ====================================================
+
+    g.append('g')
+        .attr(
+            'transform',
+            `translate(0,${h})`
+        )
+        .call(d3.axisBottom(x));
+
+    g.append('g')
+        .call(d3.axisLeft(y));
+
+    // ====================================================
+    // COLORES
+    // ====================================================
+
+    const colors = {
+
+        Low: '#10b981',
+
+        Moderate: '#eab308',
+
+        High: '#f97316',
+
+        Severe: '#ef4444'
+    };
+
+    // ====================================================
+    // BOXPLOTS
+    // ====================================================
+
+    grouped.forEach(group => {
+
+        const center =
+            x(group.level) + x.bandwidth()/2;
+
+        // ================================================
+        // WHISKERS
+        // ================================================
+
+        g.append('line')
+            .attr('x1', center)
+            .attr('x2', center)
+            .attr('y1', y(group.min))
+            .attr('y2', y(group.max))
+            .attr('stroke','#475569')
+            .attr('stroke-width',2);
+
+        // ================================================
+        // BOX
+        // ================================================
+
+        g.append('rect')
+
+            .attr(
+                'x',
+                x(group.level)
+            )
+
+            .attr(
+                'y',
+                y(group.q3)
+            )
+
+            .attr(
+                'width',
+                x.bandwidth()
+            )
+
+            .attr(
+                'height',
+                y(group.q1) - y(group.q3)
+            )
+
+            .attr('rx',8)
+
+            .attr(
+                'fill',
+                colors[group.level]
+            )
+
+            .attr('opacity',1)
+
+            .style(
+                'filter',
+                'drop-shadow(0 2px 5px rgba(0,0,0,0.08))'
+            );
+
+        // ================================================
+        // MEDIANA
+        // ================================================
+
+        g.append('line')
+
+            .attr(
+                'x1',
+                x(group.level)
+            )
+
+            .attr(
+                'x2',
+                x(group.level) + x.bandwidth()
+            )
+
+            .attr(
+                'y1',
+                y(group.median)
+            )
+
+            .attr(
+                'y2',
+                y(group.median)
+            )
+
+            .attr('stroke','#0f172a')
+
+            .attr('stroke-width',3);
+
+        // ================================================
+        // TOP CAP
+        // ================================================
+
+        g.append('line')
+
+            .attr('x1', center - 24)
+            .attr('x2', center + 24)
+
+            .attr(
+                'y1',
+                y(group.max)
+            )
+
+            .attr(
+                'y2',
+                y(group.max)
+            )
+
+            .attr('stroke','#475569')
+            .attr('stroke-width',2);
+
+        // ================================================
+        // BOTTOM CAP
+        // ================================================
+
+        g.append('line')
+
+            .attr('x1', center - 24)
+            .attr('x2', center + 24)
+
+            .attr(
+                'y1',
+                y(group.min)
+            )
+
+            .attr(
+                'y2',
+                y(group.min)
+            )
+
+            .attr('stroke','#475569')
+            .attr('stroke-width',2);
+    });
+
+    // ====================================================
+    // LABEL Y
+    // ====================================================
+
+    svg.append('text')
+
+        .attr(
+            'transform',
+            `translate(22,${H/2}) rotate(-90)`
+        )
+
+        .attr('text-anchor','middle')
+
+        .attr('fill','#475569')
+
+        .attr('font-size',14)
+
+        .attr('font-weight',600)
+
+        .text('Social Isolation Score');
+
+    // ====================================================
+    // LABEL X
+    // ====================================================
+
+    svg.append('text')
+
+        .attr('x', W/2)
+
+        .attr('y', H-12)
+
+        .attr('text-anchor','middle')
+
+        .attr('fill','#475569')
+
+        .attr('font-size',14)
+
+        .attr('font-weight',600)
+
+        .text('Addiction Risk Level');
+}
+
+function renderWithdrawalChart(selector){
+
+    const isPreview =
+    selector.includes('preview');
+
+    const el = document.querySelector(selector);
+
+    if(!el) return;
+
+    el.innerHTML = '';
+
+    // ====================================================
+    // DIMENSIONES
+    // ====================================================
+
+    const W = el.clientWidth || 900;
+    const H =
+    isPreview ? 220 : 430;
+
+    const margin = {
+        top: 30,
+        right: 30,
+        bottom: 60,
+        left: 70
+    };
+
+    const w = W - margin.left - margin.right;
+    const h = H - margin.top - margin.bottom;
+
+    // ====================================================
+    // SVG
+    // ====================================================
+
+    const svg = d3.select(selector)
+        .append('svg')
+        .attr('viewBox', `0 0 ${W} ${H}`);
+
+    const g = svg.append('g')
+        .attr(
+            'transform',
+            `translate(${margin.left},${margin.top})`
+        );
+
+    // ====================================================
+    // ORDEN
+    // ====================================================
+
+    const order = [
+        'Low',
+        'Moderate',
+        'High',
+        'Severe'
+    ];
+
+    // ====================================================
+    // DATA
+    // ====================================================
+
+    const processed = order.map(level => {
+
+        const rows =
+            dataset.filter(d => d.risk === level);
+
+        return {
+
+            level,
+
+            no:
+                rows.filter(d => d.withdrawal === 'FALSE').length,
+
+            yes:
+                rows.filter(d => d.withdrawal === 'TRUE').length
+        };
+    });
+
+    // ====================================================
+    // ESCALAS
+    // ====================================================
+
+    const x0 = d3.scaleBand()
+        .domain(order)
+        .range([0, w])
+        .padding(0.22);
+
+   const x1 = d3.scaleBand()
+    .domain([
+        'Without Symptoms',
+        'With Symptoms'
+    ])
+    .range([0, x0.bandwidth()])
+    .padding(0.08);
+
+    const y = d3.scaleLinear()
+        .domain([
+            0,
+            d3.max(processed, d => Math.max(d.no, d.yes)) * 1.12
+        ])
+        .range([h, 0]);
+
+    // ====================================================
+    // GRID
+    // ====================================================
+
+    g.append('g')
+        .attr('class','grid')
+        .call(
+            d3.axisLeft(y)
+            .tickSize(-w)
+            .tickFormat('')
+        )
+        .selectAll('line')
+        .attr('stroke','#e2e8f0');
+
+    // ====================================================
+    // AXIS
+    // ====================================================
+
+    g.append('g')
+        .attr(
+            'transform',
+            `translate(0,${h})`
+        )
+        .call(d3.axisBottom(x0));
+
+    g.append('g')
+        .call(d3.axisLeft(y));
+
+    // ====================================================
+    // COLORES
+    // ====================================================
+
+  const colors = {
+
+    'Without Symptoms': '#60a5fa',
+
+    'With Symptoms': '#F3914F'
+};
+
+    // ====================================================
+    // BARRAS
+    // ====================================================
+
+    processed.forEach(group => {
+
+        const values = [
+
+            {
+                key:'Without Symptoms',
+                value:group.no
+            },
+
+            {
+                key:'With Symptoms',
+                value:group.yes
+            }
+        ];
+
+        g.selectAll(`.bar-${group.level}`)
+            .data(values)
+            .join('rect')
+
+            .attr(
+                'x',
+                d =>
+                    x0(group.level) +
+                    x1(d.key)
+            )
+
+            .attr(
+                'width',
+                x1.bandwidth()
+            )
+
+            .attr('y', h)
+
+            .attr('height', 0)
+
+            .attr('rx', 6)
+
+            .attr(
+                'fill',
+                d => colors[d.key]
+            )
+
+            .on('mousemove', (e,d) => {
+
+                showTip(
+                    e,
+                    `
+                    <b>${group.level}</b><br>
+                    ${d.key}: ${d.value} jugadores
+                    `
+                );
+            })
+
+            .on('mouseout', hideTip)
+
+            .transition()
+            .duration(900)
+
+            .attr(
+                'y',
+                d => y(d.value)
+            )
+
+            .attr(
+                'height',
+                d => h - y(d.value)
+            );
+    });
+
+    // ====================================================
+    // LABEL Y
+    // ====================================================
+
+    svg.append('text')
+        .attr(
+            'transform',
+            `translate(22,${H/2}) rotate(-90)`
+        )
+        .attr('text-anchor','middle')
+        .attr('fill','#475569')
+        .attr('font-size',14)
+        .attr('font-weight',600)
+        .text('Number of Players');
+
+    // ====================================================
+    // LABEL X
+    // ====================================================
+
+    svg.append('text')
+        .attr('x', W/2)
+        .attr('y', H-10)
+        .attr('text-anchor','middle')
+        .attr('fill','#475569')
+        .attr('font-size',14)
+        .attr('font-weight',600)
+        .text('Addiction Risk Level');
+
+    // ====================================================
+    // LEYENDA
+    // ====================================================
+
+    const legend = svg.append('g')
+        .attr(
+            'transform',
+            `translate(${W-180},20)`
+        );
+
+     [
+    ['Without Symptoms', colors['Without Symptoms']],
+    ['With Symptoms', colors['With Symptoms']]
+        ].forEach((item,i) => {
+
+        const row = legend.append('g')
+            .attr(
+                'transform',
+                `translate(0,${i*24})`
+            );
+
+        row.append('rect')
+            .attr('width',16)
+            .attr('height',16)
+            .attr('rx',4)
+            .attr('fill', item[1]);
+
+        row.append('text')
+            .attr('x',24)
+            .attr('y',13)
+            .attr('fill','#475569')
+            .attr('font-size',13)
+            .attr('font-weight',600)
+            .text(item[0]);
+    });
 }
 
 function renderImpChart() {
@@ -878,7 +1975,7 @@ function renderImpChart() {
 }
 
 function renderCorrBars() {
-    const el = document.getElementById('chart-corr-bars');
+    const el = document.getElementById('chart-corr');
     if (!el) return;
     el.innerHTML = '';
     corrData.forEach(d => {
@@ -909,7 +2006,13 @@ function renderHeatmap() {
     const w = W - m.left - m.right, h = H - m.top - m.bottom;
     const n = heatmapVars.length;
     const cellW = w/n, cellH = h/n;
-    const colorScale = d3.scaleSequential().domain([-1,1]).interpolator(d3.interpolateRdBu);
+    const colorScale = d3.scaleLinear()
+        .domain([-1, 0, 1])
+        .range([
+        '#f97316', 
+        '#e2e8f0',   
+        '#3b82f6'    
+        ]);
     const svg = d3.select('#chart-heatmap').append('svg').attr('viewBox', `0 0 ${W} ${H}`);
     const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
     for (let i = 0; i < n; i++) {
@@ -929,16 +2032,279 @@ function renderHeatmap() {
                 .text(v.toFixed(2));
         }
     }
-    g.selectAll('.xlabel').data(heatmapShort).join('text').attr('class','xlabel')
-        .attr('x', (d,i) => i*cellW+cellW/2).attr('y', h+16)
-        .attr('text-anchor','middle').attr('fill','var(--text3)').attr('font-size',10)
-        .attr('font-family','DM Mono, monospace')
-        .attr('transform', (d,i) => `rotate(-30,${i*cellW+cellW/2},${h+16})`)
-        .text(d => d);
+g.selectAll('.xlabel')
+    .data(heatmapShort)
+    .join('text')
+
+    .attr('class','xlabel')
+
+    .attr(
+        'x',
+        (d,i) => i*cellW + cellW/2
+    ).attr('y', h + 24).attr('text-anchor','middle').attr('fill','#64748b').
+    attr('font-size',12).attr('font-weight',700).text(d => d);
+
     g.selectAll('.ylabel').data(heatmapShort).join('text').attr('class','ylabel')
         .attr('x',-8).attr('y', (d,i) => i*cellH+cellH/2+4)
         .attr('text-anchor','end').attr('fill','var(--text3)').attr('font-size',10)
         .attr('font-family','DM Mono, monospace').text(d => d);
+}
+
+function renderViolinPlot(selector){
+    const isPreview =
+    selector.includes('preview');
+
+    const el = document.querySelector(selector);
+
+    if(!el) return;
+
+    el.innerHTML = '';
+
+    const W = el.clientWidth || 900;
+    const H =
+    isPreview ? 220 : 430;
+
+    const margin = {
+        top: 40,
+        right: 30,
+        bottom: 60,
+        left: 70
+    };
+
+    const w = W - margin.left - margin.right;
+    const h = H - margin.top - margin.bottom;
+
+    const svg = d3.select(selector)
+        .append('svg')
+        .attr('viewBox', `0 0 ${W} ${H}`);
+
+    const g = svg.append('g')
+        .attr(
+            'transform',
+            `translate(${margin.left},${margin.top})`
+        );
+
+    // ====================================================
+    // ORDEN
+    // ====================================================
+
+    const order = [
+        'Low',
+        'Moderate',
+        'High',
+        'Severe'
+    ];
+
+    // ====================================================
+    // DATOS
+    // ====================================================
+
+    const grouped = order.map(level => ({
+
+        level,
+
+        values:
+            dataset
+                .filter(d => d.risk === level)
+                .map(d => d.hours)
+                .filter(v => !isNaN(v))
+    }));
+
+    // ====================================================
+    // ESCALAS
+    // ====================================================
+
+    const x = d3.scaleBand()
+        .domain(order)
+        .range([0, w])
+        .padding(0.18);
+
+    const y = d3.scaleLinear()
+        .domain([0, 15])
+        .range([h, 0]);
+
+    g.append('g')
+        .attr('transform', `translate(0,${h})`)
+        .call(d3.axisBottom(x))
+        .selectAll('text')
+        .style('font-size','13px')
+        .style('font-weight','600');
+
+    g.append('g')
+        .call(d3.axisLeft(y));
+
+    // ====================================================
+    // GRID
+    // ====================================================
+
+    g.append('g')
+        .attr('class','grid')
+        .call(
+            d3.axisLeft(y)
+            .tickSize(-w)
+            .tickFormat('')
+        )
+        .selectAll('line')
+        .attr('stroke','#e2e8f0');
+
+    // ====================================================
+    // KDE
+    // ====================================================
+
+    function kernelDensityEstimator(kernel, X) {
+
+        return function(V) {
+
+            return X.map(x => [
+
+                x,
+
+                d3.mean(V, v => kernel(x - v))
+            ]);
+        };
+    }
+
+    function kernelEpanechnikov(k) {
+
+        return function(v) {
+
+            return Math.abs(v /= k) <= 1
+                ? 0.75 * (1 - v * v) / k
+                : 0;
+        };
+    }
+
+    const kde = kernelDensityEstimator(
+        kernelEpanechnikov(0.7),
+        y.ticks(50)
+    );
+
+    const maxDensity = 0.25;
+
+    const widthScale = d3.scaleLinear()
+        .range([0, x.bandwidth()/2])
+        .domain([0, maxDensity]);
+
+    // ====================================================
+    // COLORES
+    // ====================================================
+
+    const colors = {
+
+    Low: '#10b981',
+
+    Moderate: '#eab308',
+
+    High: '#f97316',
+
+    Severe: '#ef4444'
+};
+
+    // ====================================================
+    // VIOLINS
+    // ====================================================
+
+    grouped.forEach(group => {
+
+        const density = kde(group.values);
+
+        const center =
+            x(group.level) + x.bandwidth()/2;
+
+        const area = d3.area()
+            .x0(d => center - widthScale(d[1]))
+            .x1(d => center + widthScale(d[1]))
+            .y(d => y(d[0]))
+            .curve(d3.curveCatmullRom);
+
+        g.append('path')
+            .datum(density)
+            .attr('fill', colors[group.level])
+            .attr('stroke', '#404040')
+            .attr('stroke-width', 2)
+            .attr('d', area)
+            .attr('opacity', 0.82);
+
+        // ================================================
+        // PUNTOS
+        // ================================================
+
+        g.selectAll(`.dot-${group.level}`)
+            .data(group.values)
+            .join('circle')
+
+            .attr(
+                'cx',
+                () =>
+                    center +
+                    (Math.random()-0.5)*60
+            )
+
+            .attr(
+                'cy',
+                d => y(d)
+            )
+
+            .attr('r',2.2)
+
+            .attr(
+                'fill',
+                'rgba(0,0,0,0.35)'
+            );
+
+        // ================================================
+        // MEDIANA
+        // ================================================
+
+        const median =
+            d3.median(group.values);
+
+        g.append('line')
+            .attr('x1', center - 28)
+            .attr('x2', center + 28)
+            .attr('y1', y(median))
+            .attr('y2', y(median))
+            .attr('stroke', '#111827')
+            .attr('stroke-width', 4)
+            .attr('stroke-linecap','round');
+
+        // ================================================
+        // LABEL N
+        // ================================================
+
+        g.append('text')
+            .attr('x', center)
+            .attr('y', -12)
+            .attr('text-anchor','middle')
+            .attr('font-size',14)
+            .attr('font-weight',700)
+            .attr('fill','#374151')
+            .text(`n = ${group.values.length}`);
+    });
+
+    // ====================================================
+    // LABELS
+    // ====================================================
+
+    svg.append('text')
+        .attr(
+            'transform',
+            `translate(20,${H/2}) rotate(-90)`
+        )
+        .attr('text-anchor','middle')
+        .attr('fill','#475569')
+        .attr('font-size',14)
+        .attr('font-weight',600)
+        .text('Daily Gaming Hours');
+
+    svg.append('text')
+        .attr('x', W/2)
+        .attr('y', H-10)
+        .attr('text-anchor','middle')
+        .attr('fill','#475569')
+        .attr('font-size',14)
+        .attr('font-weight',600)
+        .text('Addiction Risk Level');
 }
 
 // ============================================================
@@ -967,7 +2333,7 @@ function renderClusterBars() {
             grp.append('rect')
                 .attr('x', x1(c.name)).attr('width', x1.bandwidth())
                 .attr('y', h).attr('height', 0)
-                .attr('fill', c.color).attr('rx', 2).attr('opacity', 0.85)
+                .attr('fill', c.color).attr('rx', 8).attr('opacity', 0.85)
                 .on('mouseover', (e) => showTip(e, `${c.name}<br>${v}: <b>${c.values[vi]}</b>`))
                 .on('mouseout', hideTip)
                 .transition().duration(600).delay(vi*80 + ci*40)
@@ -1270,4 +2636,71 @@ async function predict() {
 
     }
 
+    //=================================================
+    // Creacion de graficos despliegables
+    //=================================================
+
+
 }
+
+        window.openChart = function(type){
+
+        const modal =
+        document.getElementById('chart-modal');
+
+        const container =
+        document.getElementById(
+            'modal-chart-container'
+        );
+
+        container.innerHTML =
+        '<div id="dynamic-chart"></div>';
+
+        modal.classList.remove('hidden');
+
+        switch(type){
+
+        case 'violin':
+
+            renderViolinPlot(
+                '#dynamic-chart'
+            );
+
+            break;
+
+        case 'withdrawal':
+
+            renderWithdrawalChart(
+                '#dynamic-chart'
+            );
+
+            break;
+
+        case 'boxplot':
+
+            renderBoxplot(
+                '#dynamic-chart'
+            );
+
+            break;
+
+        case 'gamingIsolation':
+
+            renderGamingIsolationBoxplot(
+                '#dynamic-chart'
+            );
+
+            break;
+    }
+    };
+
+    document
+    .getElementById('close-modal')
+
+    .addEventListener('click', () => {
+
+    document
+        .getElementById('chart-modal')
+
+        .classList.add('hidden');
+    });
