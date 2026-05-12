@@ -162,8 +162,14 @@
       <div class="section-tag">Dataset overview</div>
       <div class="section-title">Distribution of Key Variables</div>
       <p class="section-desc">Descriptive statistics and distribution of addiction risk levels among the 1,000 analyzed players.</p>
+
+
     </div>
+
+    
 <div class="grid-4" style="margin-bottom:1.5rem">
+
+  
 
   <div class="kpi-card">
     <span class="kpi-label">
@@ -208,6 +214,8 @@
     </span>
 
   </div>
+
+  
 
   <div class="kpi-card">
 
@@ -255,6 +263,323 @@
 
   </div>
 
+
+</div>
+
+<!-- ===================================================== -->
+<!-- FILTER BUTTON -->
+<!-- ===================================================== -->
+
+<div class="overview-filter-wrap">
+
+    <button id="filter-toggle-btn">
+
+        <svg width="18" height="18" viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2">
+
+            <path d="
+                M3 5h18
+                L14 14v5
+                l-4 2v-7
+                L3 5z
+            "/>
+
+        </svg>
+
+        Filters
+
+    </button>
+
+    <!-- ============================================== -->
+    <!-- FILTER PANEL -->
+    <!-- ============================================== -->
+
+    <div id="overview-filter-panel" class="hidden">
+
+        <!-- ====================================== -->
+        <!-- RISK -->
+        <!-- ====================================== -->
+
+<div class="filter-group">
+
+    <div class="filter-title">
+        Addiction Risk Level
+    </div>
+
+    <!-- ===================================== -->
+    <!-- LOW -->
+    <!-- ===================================== -->
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="risk-filter"
+            value="Low"
+        >
+
+        Low
+    </label>
+
+    <!-- ===================================== -->
+    <!-- MODERATE -->
+    <!-- ===================================== -->
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="risk-filter"
+            value="Moderate"
+        >
+
+        Moderate
+    </label>
+
+    <!-- ===================================== -->
+    <!-- HIGH -->
+    <!-- ===================================== -->
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="risk-filter"
+            value="High"
+        >
+
+        High
+    </label>
+
+    <!-- ===================================== -->
+    <!-- SEVERE -->
+    <!-- ===================================== -->
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="risk-filter"
+            value="Severe"
+        >
+
+        Severe
+    </label>
+
+</div>
+
+<!-- ====================================== -->
+<!-- AGE -->
+<!-- ====================================== -->
+
+<div class="filter-group">
+
+    <div class="filter-title">
+        Age
+    </div>
+
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="age-filter"
+            value="10-15"
+        >
+
+        10 - 15
+    </label>
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="age-filter"
+            value="16-21"
+        >
+
+        16 - 21
+    </label>
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="age-filter"
+            value="22-27"
+        >
+
+        22 - 27
+    </label>
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="age-filter"
+            value="28-35"
+        >
+
+        28 - 35
+    </label>
+
+</div>
+
+<!-- ====================================== -->
+<!-- WITHDRAWAL -->
+<!-- ====================================== -->
+
+<div class="filter-group">
+
+    <div class="filter-title">
+        Withdrawal Symptoms
+    </div>
+
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="withdrawal-filter"
+            value="TRUE"
+        >
+
+        YES
+    </label>
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="withdrawal-filter"
+            value="FALSE"
+        >
+
+        NO
+    </label>
+
+</div>
+
+<!-- ====================================== -->
+<!-- GAMING HOURS -->
+<!-- ====================================== -->
+
+<div class="filter-group">
+
+    <div class="filter-title">
+        Daily Gaming Hours
+    </div>
+
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="hours-filter"
+            value="0-4"
+        >
+
+        0 - 4
+    </label>
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="hours-filter"
+            value="5-9"
+        >
+
+        5 - 9
+    </label>
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="hours-filter"
+            value="10-14"
+        >
+
+        10 - 14
+    </label>
+
+</div>
+
+<!-- ====================================== -->
+<!-- CONTINUED DESPITE PROBLEMS -->
+<!-- ====================================== -->
+
+<div class="filter-group">
+
+    <div class="filter-title">
+        Continued Despite Problems
+    </div>
+
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="continued-filter"
+            value="TRUE"
+        >
+
+        YES
+    </label>
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="continued-filter"
+            value="FALSE"
+        >
+
+        NO
+    </label>
+
+</div>
+
+<!-- ====================================== -->
+<!-- LOSS OF OTHER INTERESTS -->
+<!-- ====================================== -->
+
+<div class="filter-group">
+
+    <div class="filter-title">
+        Loss of Other Interests
+    </div>
+
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="loss-filter"
+            value="TRUE"
+        >
+
+        YES
+    </label>
+
+    <label class="filter-option">
+
+        <input
+            type="checkbox"
+            class="loss-filter"
+            value="FALSE"
+        >
+
+        NO
+    </label>
+
+</div>
+
+    </div>
+
 </div>
 
     <div class="grid-2">
@@ -274,6 +599,27 @@
         <div class="card-title">Percentage of Gaming Platform Usage</div>
         <div id="chart-platform" style="height:220px"></div>
       </div>
+      <div class="card">
+
+  <div class="card-title">
+    Distribution — Player Age
+  </div>
+
+  <div id="chart-age-dist" style="height:220px"></div>
+
+</div>
+
+<div class="card">
+
+  <div class="card-title">
+    Distribution — Monthly Spending USD
+  </div>
+
+  <div id="chart-spending-dist" style="height:220px"></div>
+
+</div>
+
+
     </div>
   </section>
 
@@ -384,119 +730,600 @@
   </section>
 
   <!-- ===== OBJ 2 ===== -->
-  <section id="obj2" class="section">
-    <div class="section-header">
-      <div class="section-tag">Objective 2 · K-Means Clustering · k=4</div>
-      <div class="section-title">Player Segmentation by Physical and Mental Health</div>
-      <p class="section-desc">Four differentiated profiles identified using K-Means. The selection of k=4 is justified by contextual coherence with the risk categories.</p>
+<!-- ===== OBJ 2 ===== -->
+<section id="obj2" class="section">
+
+  <div class="section-header">
+    <div class="section-tag">
+      Objective 2 · K-Means Clustering · K=4
     </div>
 
-    <div class="cluster-grid" style="margin-bottom:1.5rem">
-      <div class="cluster-card">
-        <span class="cluster-badge" style="background:rgba(99,179,237,0.15);color:var(--low)">Cluster 0</span>
-        <div class="cluster-name">Young Casual and Healthy Player</div>
-        <div class="cluster-stats">
-          <div class="cstat"><span class="cstat-label">Gaming hours/day</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:27%;background:var(--low)"></div></div><span class="cstat-val">4.14h</span></div>
-          <div class="cstat"><span class="cstat-label">Exercise/week</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:73%;background:var(--low)"></div></div><span class="cstat-val">8.00h</span></div>
-          <div class="cstat"><span class="cstat-label">Social isolation</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:25%;background:var(--low)"></div></div><span class="cstat-val">2.50</span></div>
-          <div class="cstat"><span class="cstat-label">Average risk</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:2%;background:var(--low)"></div></div><span class="cstat-val" style="color:var(--low)">0.02 Low</span></div>
-        </div>
-      </div>
-
-      <div class="cluster-card">
-        <span class="cluster-badge" style="background:rgba(99,179,237,0.15);color:var(--moderate)">Cluster 1</span>
-        <div class="cluster-name">Intermediate Player with Signs of Deterioration</div>
-        <div class="cluster-stats">
-          <div class="cstat"><span class="cstat-label">Gaming hours/day</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:50%;background:var(--moderate)"></div></div><span class="cstat-val">7.53h</span></div>
-          <div class="cstat"><span class="cstat-label">Exercise/week</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:57%;background:var(--moderate)"></div></div><span class="cstat-val">6.23h</span></div>
-          <div class="cstat"><span class="cstat-label">Social isolation</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:48%;background:var(--moderate)"></div></div><span class="cstat-val">4.78</span></div>
-          <div class="cstat"><span class="cstat-label">Average risk</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:34%;background:var(--moderate)"></div></div><span class="cstat-val" style="color:var(--moderate)">1.03 Moderate</span></div>
-        </div>
-      </div>
-            <div class="cluster-card">
-        <span class="cluster-badge" style="background:rgba(99,179,237,0.15);color:var(--high)">Cluster 2</span>
-        <div class="cluster-name">Stable Veteran Player</div>
-        <div class="cluster-stats">
-          <div class="cstat">
-            <span class="cstat-label">Gaming hours/day</span>
-            <div class="cstat-bar-wrap">
-              <div class="cstat-bar" style="width:28%;background:var(--high)"></div>
-            </div>
-            <span class="cstat-val">4.16h</span>
-          </div>
-
-          <div class="cstat">
-            <span class="cstat-label">Years gaming</span>
-            <div class="cstat-bar-wrap">
-              <div class="cstat-bar" style="width:80%;background:var(--high)"></div>
-            </div>
-            <span class="cstat-val">10.95 years</span>
-          </div>
-
-          <div class="cstat">
-            <span class="cstat-label">Social isolation</span>
-            <div class="cstat-bar-wrap">
-              <div class="cstat-bar" style="width:26%;background:var(--high)"></div>
-            </div>
-            <span class="cstat-val">2.60</span>
-          </div>
-
-          <div class="cstat">
-            <span class="cstat-label">Average risk</span>
-            <div class="cstat-bar-wrap">
-              <div class="cstat-bar" style="width:2%;background:var(--high)"></div>
-            </div>
-            <span class="cstat-val" style="color:var(--high)">1.80 Low</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="cluster-card">
-        <span class="cluster-badge" style="background:rgba(99,179,237,0.15);color:var(--danger)">Cluster 3</span>
-        <div class="cluster-name">High-Risk Player — Severe Deterioration</div>
-        <div class="cluster-stats">
-
-          <div class="cstat">
-            <span class="cstat-label">Gaming hours/day</span>
-            <div class="cstat-bar-wrap">
-              <div class="cstat-bar" style="width:71%;background:var(--danger)"></div>
-            </div>
-            <span class="cstat-val">10.71h</span>
-          </div>
-
-          <div class="cstat">
-            <span class="cstat-label">Exercise/week</span>
-            <div class="cstat-bar-wrap">
-              <div class="cstat-bar" style="width:43%;background:var(--danger)"></div>
-            </div>
-            <span class="cstat-val">4.71h</span>
-          </div>
-
-          <div class="cstat">
-            <span class="cstat-label">Social isolation</span>
-            <div class="cstat-bar-wrap">
-              <div class="cstat-bar" style="width:70%;background:var(--danger)"></div>
-            </div>
-            <span class="cstat-val">6.96</span>
-          </div>
-
-          <div class="cstat">
-            <span class="cstat-label">Average risk</span>
-            <div class="cstat-bar-wrap">
-              <div class="cstat-bar" style="width:84%;background:var(--danger)"></div>
-            </div>
-            <span class="cstat-val" style="color:var(--danger)">2.51 High-Severe</span>
-          </div>
-
-        </div>
-      </div>
+    <div class="section-title">
+      Player Segmentation by Physical and Mental Health
     </div>
 
+    <p class="section-desc">
+      Four differentiated profiles identified using K-Means clustering.
+      The selection of k=4 is justified by contextual coherence with addiction categories.
+    </p>
+  </div>
+  
+<div class="cluster-grid" style="margin-bottom:1.5rem">
+
+
+<!-- ===================================================== -->
+<!-- CLUSTER 0 -->
+<!-- ===================================================== -->
+
+<div class="cluster-card">
+
+  <span class="cluster-badge"
+    style="
+      background:rgba(16,185,129,.12);
+      color:var(--low)
+    ">
+    Cluster 0
+  </span>
+
+  <div class="cluster-name">
+    Young Casual and Healthy Player
+  </div>
+
+  <div class="cluster-stats">
+
+    <div class="cstat">
+      <span class="cstat-label">Gaming hours/day</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:27%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val">4.14h</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Exercise/week</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:73%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val">8.00h</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Social isolation</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:25%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val">2.50</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Spending/month</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:18%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val">$51</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Gaming intensity</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:35%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Low</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Sleep deterioration</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:12%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Very Low</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Economic spending</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:20%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Low</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Withdrawal symptoms</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:5%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val">None</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Average risk</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:2%;background:var(--low)">
+        </div>
+      </div>
+
+      <span class="cstat-val"
+        style="color:var(--low)">
+        0.02 Low
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- CLUSTER 1 -->
+<!-- ===================================================== -->
+
+<div class="cluster-card">
+
+  <span class="cluster-badge"
+    style="
+      background:rgba(234,179,8,.12);
+      color:var(--moderate)
+    ">
+    Cluster 1
+  </span>
+
+  <div class="cluster-name">
+    Intermediate Player with Signs of Deterioration
+  </div>
+
+  <div class="cluster-stats">
+
+    <div class="cstat">
+      <span class="cstat-label">Gaming hours/day</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:50%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val">7.53h</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Exercise/week</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:57%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val">6.23h</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Social isolation</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:48%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val">4.78</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Spending/month</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:32%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val">$91</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Gaming intensity</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:60%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Moderate</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Sleep deterioration</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:52%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Medium</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Economic spending</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:38%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Moderate</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Withdrawal symptoms</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:61%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Present</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Average risk</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:34%;background:var(--moderate)">
+        </div>
+      </div>
+
+      <span class="cstat-val"
+        style="color:var(--moderate)">
+        1.03 Moderate
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- CLUSTER 2 -->
+<!-- ===================================================== -->
+
+<div class="cluster-card">
+
+  <span class="cluster-badge"
+    style="
+      background:rgba(249,115,22,.12);
+      color:var(--high)
+    ">
+    Cluster 2
+  </span>
+
+  <div class="cluster-name">
+    Stable Veteran Player
+  </div>
+
+  <div class="cluster-stats">
+
+    <div class="cstat">
+      <span class="cstat-label">Gaming hours/day</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:28%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val">4.16h</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Exercise/week</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:72%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val">7.81h</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Social isolation</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:26%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val">2.60</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Spending/month</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:18%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val">$52</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Gaming intensity</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:30%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Low</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Sleep deterioration</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:18%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Very Low</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Economic spending</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:22%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Low</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Withdrawal symptoms</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:6%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Rare</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Average risk</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:2%;background:var(--high)">
+        </div>
+      </div>
+
+      <span class="cstat-val"
+        style="color:var(--high)">
+        0.01 Low
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- CLUSTER 3 -->
+<!-- ===================================================== -->
+
+<div class="cluster-card">
+
+  <span class="cluster-badge"
+    style="
+      background:rgba(239,68,68,.12);
+      color:var(--danger)
+    ">
+    Cluster 3
+  </span>
+
+  <div class="cluster-name">
+    High-Risk Player — Severe Deterioration
+  </div>
+
+  <div class="cluster-stats">
+
+    <div class="cstat">
+      <span class="cstat-label">Gaming hours/day</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:71%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val">10.71h</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Exercise/week</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:43%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val">4.71h</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Social isolation</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:70%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val">6.96</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Spending/month</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:91%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val">$319</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Gaming intensity</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:92%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Extreme</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Sleep deterioration</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:88%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Severe</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Economic spending</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:95%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Very High</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Withdrawal symptoms</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:90%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val">Severe</span>
+    </div>
+
+    <div class="cstat">
+      <span class="cstat-label">Average risk</span>
+
+      <div class="cstat-bar-wrap">
+        <div class="cstat-bar"
+          style="width:84%;background:var(--danger)">
+        </div>
+      </div>
+
+      <span class="cstat-val"
+        style="color:var(--danger)">
+        2.51 High-Severe
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+</div>
     <div class="card">
       <div class="card-title">Centroid Comparison by Variable</div>
+      <div id="cluster-filters" class="cluster-filters">
+
+    <button class="cluster-btn active"
+        data-cluster="0">
+        Balanced
+    </button>
+
+    <button class="cluster-btn active"
+        data-cluster="1">
+        Moderate Risk
+    </button>
+
+    <button class="cluster-btn active"
+        data-cluster="2">
+        Veteran Stable
+    </button>
+
+    <button class="cluster-btn active"
+        data-cluster="3">
+        Severe Addiction
+    </button>
+
+</div>
       <div id="chart-clusters"></div>
     </div>
   </section>
+
+      </div>
+
+</section>
 
   <!-- ===== OBJ 3 ===== -->
   <section id="obj3" class="section">
@@ -554,7 +1381,6 @@
 
     <div id="chart-coef-compare"></div>
   </div>
-
 </div>
   </section>
 
@@ -712,15 +1538,27 @@
 
 </div>
 
+<!-- ========================================================= -->
+<!-- CHART MODAL -->
+<!-- ========================================================= -->
+
 <div id="chart-modal" class="chart-modal hidden">
 
     <div class="chart-modal-content">
+
+        <!-- CLOSE BUTTON -->
 
         <button id="close-modal">
             ✕
         </button>
 
-        <div id="modal-chart-container"></div>
+        <!-- DYNAMIC CHART -->
+
+        <div id="dynamic-chart"></div>
+
+        <!-- ANALYSIS SECTION -->
+
+        <div id="chart-analysis"></div>
 
     </div>
 
