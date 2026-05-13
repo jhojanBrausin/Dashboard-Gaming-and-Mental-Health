@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/styles.css?v=1">
 </head>
-<body>
+<body class="sidebar-hidden">
 
 <div class="tooltip" id="tooltip"></div>
 
@@ -47,7 +47,7 @@
             </button>
 
             <button class="nav-btn" onclick="showSection('obj3', this)">
-                🤖 Obj. 3 — Regression
+                🤖 Obj. 3— Regression
             </button>
 
             <button class="nav-btn" onclick="showSection('predictor', this)">
@@ -76,34 +76,59 @@
                 on psychological well-being
             </p>
 
-            <div class="header-stats">
+<div class="header-stats">
 
-                <div class="hstat">
-                    <span class="hstat-val">1,000</span>
-                    <span class="hstat-label">Records</span>
-                </div>
+    <div class="hstat">
+        <span class="hstat-val">1,000</span>
+        <span class="hstat-label">
+            Records
+        </span>
+    </div>
 
-                <div class="hstat">
-                    <span class="hstat-val">25</span>
-                    <span class="hstat-label">Variables</span>
-                </div>
+    <div class="hstat">
+        <span class="hstat-val">25</span>
+        <span class="hstat-label">
+            Variables
+        </span>
+    </div>
 
-                <div class="hstat">
-                    <span class="hstat-val">3</span>
-                    <span class="hstat-label">Models</span>
-                </div>
+    <div class="hstat">
+        <span class="hstat-val">
+            Addiction Risk Level
+        </span>
+        <span class="hstat-label">
+            Main Variable
+        </span>
+    </div>
 
-                <div class="hstat">
-                    <span class="hstat-val">94.3%</span>
-                    <span class="hstat-label">Regression R²</span>
-                </div>
+    <div class="hstat">
+        <span class="hstat-val">
+            Random Forest
+        </span>
+        <span class="hstat-label">
+            Model 1
+        </span>
+    </div>
 
-                <div class="hstat">
-                    <span class="hstat-val">4</span>
-                    <span class="hstat-label">Clusters</span>
-                </div>
+    <div class="hstat">
+        <span class="hstat-val">
+            K-Means
+        </span>
+        <span class="hstat-label">
+            Model 2
+        </span>
+    </div>
 
-            </div>
+    <div class="hstat">
+        <span class="hstat-val">
+            Multiple Linear Regression
+        </span>
+        <span class="hstat-label">
+            Model 3
+        </span>
+    </div>
+
+</div>
 
         </header>
 
@@ -1504,6 +1529,37 @@
         <div id="fullscreen-container" style="width:100%;min-height:700px"></div>
     </div>
   </div>
+
+  <script>
+
+const sidebar =
+
+    document.querySelector('.sidebar');
+
+document.addEventListener('mousemove', e => {
+
+    if(e.clientX <= 28){
+
+        document.body.classList.remove(
+            'sidebar-hidden'
+        );
+
+    } else if(
+
+        !sidebar.matches(':hover')
+
+        &&
+
+        e.clientX > 320
+    ){
+
+        document.body.classList.add(
+            'sidebar-hidden'
+        );
+    }
+});
+
+</script>
 
 
 
