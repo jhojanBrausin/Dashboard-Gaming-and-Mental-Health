@@ -156,471 +156,168 @@
       <span class="result-badge badge-success">✅ Objective achieved — R²=0.9429 · MAE=0.2195 · RMSE=0.2709</span>
     </div>
   </section>
-  <!-- ===== OVERVIEW ===== -->
+<!-- ===== OVERVIEW ===== -->
   <section id="overview" class="section">
     <div class="section-header">
       <div class="section-tag">Dataset overview</div>
       <div class="section-title">Distribution of Key Variables</div>
       <p class="section-desc">Descriptive statistics and distribution of addiction risk levels among the 1,000 analyzed players.</p>
-
-
     </div>
 
-    
 <div class="grid-4" style="margin-bottom:1.5rem">
 
-  
-
   <div class="kpi-card">
-    <span class="kpi-label">
-      Gaming hours / day
-    </span>
-
-    <span
-      id="kpi-hours"
-      class="kpi-value"
-      style="color:var(--accent)"
-    >
-      --
-    </span>
-
-    <span
-      id="kpi-hours-sub"
-      class="kpi-sub"
-    >
-      Loading...
-    </span>
+    <span class="kpi-label">Gaming hours / day</span>
+    <span id="kpi-hours" class="kpi-value" style="color:var(--accent)">--</span>
+    <span id="kpi-hours-sub" class="kpi-sub">Loading...</span>
   </div>
 
   <div class="kpi-card">
-
-    <span class="kpi-label">
-      Sleep hours / night
-    </span>
-
-    <span
-      id="kpi-sleep"
-      class="kpi-value"
-      style="color:var(--accent3)"
-    >
-      --
-    </span>
-
-    <span
-      id="kpi-sleep-sub"
-      class="kpi-sub"
-    >
-      Loading...
-    </span>
-
-  </div>
-
-  
-
-  <div class="kpi-card">
-
-    <span class="kpi-label">
-      Social isolation
-    </span>
-
-    <span
-      id="kpi-isolation"
-      class="kpi-value"
-      style="color:var(--accent2)"
-    >
-      --
-    </span>
-
-    <span
-      id="kpi-isolation-sub"
-      class="kpi-sub"
-    >
-      Loading...
-    </span>
-
+    <span class="kpi-label">Sleep hours / night</span>
+    <span id="kpi-sleep" class="kpi-value" style="color:var(--accent3)">--</span>
+    <span id="kpi-sleep-sub" class="kpi-sub">Loading...</span>
   </div>
 
   <div class="kpi-card">
-
-    <span class="kpi-label">
-      Monthly spending USD
-    </span>
-
-    <span
-      id="kpi-spending"
-      class="kpi-value"
-      style="color:var(--purple)"
-    >
-      --
-    </span>
-
-    <span
-      id="kpi-spending-sub"
-      class="kpi-sub"
-    >
-      Loading...
-    </span>
-
+    <span class="kpi-label">Social isolation</span>
+    <span id="kpi-isolation" class="kpi-value" style="color:var(--accent2)">--</span>
+    <span id="kpi-isolation-sub" class="kpi-sub">Loading...</span>
   </div>
 
+  <div class="kpi-card">
+    <span class="kpi-label">Monthly spending USD</span>
+    <span id="kpi-spending" class="kpi-value" style="color:var(--purple)">--</span>
+    <span id="kpi-spending-sub" class="kpi-sub">Loading...</span>
+  </div>
 
 </div>
-
-<!-- ===================================================== -->
-<!-- FILTER BUTTON -->
-<!-- ===================================================== -->
 
 <div class="overview-filter-wrap">
 
     <button id="filter-toggle-btn">
-
-        <svg width="18" height="18" viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2">
-
-            <path d="
-                M3 5h18
-                L14 14v5
-                l-4 2v-7
-                L3 5z
-            "/>
-
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 5h18 L14 14v5 l-4 2v-7 L3 5z"/>
         </svg>
-
         Filters
-
     </button>
-
-    <!-- ============================================== -->
-    <!-- FILTER PANEL -->
-    <!-- ============================================== -->
 
     <div id="overview-filter-panel" class="hidden">
 
-        <!-- ====================================== -->
-        <!-- RISK -->
-        <!-- ====================================== -->
-
-<div class="filter-group">
-
-    <div class="filter-title">
-        Addiction Risk Level
-    </div>
-
-    <!-- ===================================== -->
-    <!-- LOW -->
-    <!-- ===================================== -->
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="risk-filter"
-            value="Low"
-        >
-
-        Low
-    </label>
-
-    <!-- ===================================== -->
-    <!-- MODERATE -->
-    <!-- ===================================== -->
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="risk-filter"
-            value="Moderate"
-        >
-
-        Moderate
-    </label>
-
-    <!-- ===================================== -->
-    <!-- HIGH -->
-    <!-- ===================================== -->
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="risk-filter"
-            value="High"
-        >
-
-        High
-    </label>
-
-    <!-- ===================================== -->
-    <!-- SEVERE -->
-    <!-- ===================================== -->
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="risk-filter"
-            value="Severe"
-        >
-
-        Severe
-    </label>
-
-</div>
-
-<!-- ====================================== -->
-<!-- AGE -->
-<!-- ====================================== -->
-
-<div class="filter-group">
-
-    <div class="filter-title">
-        Age
-    </div>
-
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="age-filter"
-            value="10-15"
-        >
-
-        10 - 15
-    </label>
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="age-filter"
-            value="16-21"
-        >
-
-        16 - 21
-    </label>
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="age-filter"
-            value="22-27"
-        >
-
-        22 - 27
-    </label>
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="age-filter"
-            value="28-35"
-        >
-
-        28 - 35
-    </label>
-
-</div>
-
-<!-- ====================================== -->
-<!-- WITHDRAWAL -->
-<!-- ====================================== -->
-
-<div class="filter-group">
-
-    <div class="filter-title">
-        Withdrawal Symptoms
-    </div>
-
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="withdrawal-filter"
-            value="TRUE"
-        >
-
-        YES
-    </label>
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="withdrawal-filter"
-            value="FALSE"
-        >
-
-        NO
-    </label>
-
-</div>
-
-<!-- ====================================== -->
-<!-- GAMING HOURS -->
-<!-- ====================================== -->
-
-<div class="filter-group">
-
-    <div class="filter-title">
-        Daily Gaming Hours
-    </div>
-
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="hours-filter"
-            value="0-4"
-        >
-
-        0 - 4
-    </label>
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="hours-filter"
-            value="5-9"
-        >
-
-        5 - 9
-    </label>
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="hours-filter"
-            value="10-14"
-        >
-
-        10 - 14
-    </label>
-
-</div>
-
-<!-- ====================================== -->
-<!-- CONTINUED DESPITE PROBLEMS -->
-<!-- ====================================== -->
-
-<div class="filter-group">
-
-    <div class="filter-title">
-        Continued Despite Problems
-    </div>
-
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="continued-filter"
-            value="TRUE"
-        >
-
-        YES
-    </label>
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="continued-filter"
-            value="FALSE"
-        >
-
-        NO
-    </label>
-
-</div>
-
-<!-- ====================================== -->
-<!-- LOSS OF OTHER INTERESTS -->
-<!-- ====================================== -->
-
-<div class="filter-group">
-
-    <div class="filter-title">
-        Loss of Other Interests
-    </div>
-
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="loss-filter"
-            value="TRUE"
-        >
-
-        YES
-    </label>
-
-    <label class="filter-option">
-
-        <input
-            type="checkbox"
-            class="loss-filter"
-            value="FALSE"
-        >
-
-        NO
-    </label>
-
-</div>
+        <div class="filter-group">
+            <div class="filter-title">Addiction Risk Level</div>
+            <label class="filter-option"><input type="checkbox" class="risk-filter" value="Low"> Low</label>
+            <label class="filter-option"><input type="checkbox" class="risk-filter" value="Moderate"> Moderate</label>
+            <label class="filter-option"><input type="checkbox" class="risk-filter" value="High"> High</label>
+            <label class="filter-option"><input type="checkbox" class="risk-filter" value="Severe"> Severe</label>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">Age</div>
+            <label class="filter-option"><input type="checkbox" class="age-filter" value="10-15"> 10 - 15</label>
+            <label class="filter-option"><input type="checkbox" class="age-filter" value="16-21"> 16 - 21</label>
+            <label class="filter-option"><input type="checkbox" class="age-filter" value="22-27"> 22 - 27</label>
+            <label class="filter-option"><input type="checkbox" class="age-filter" value="28-35"> 28 - 35</label>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">Withdrawal Symptoms</div>
+            <label class="filter-option"><input type="checkbox" class="withdrawal-filter" value="TRUE"> YES</label>
+            <label class="filter-option"><input type="checkbox" class="withdrawal-filter" value="FALSE"> NO</label>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">Daily Gaming Hours</div>
+            <label class="filter-option"><input type="checkbox" class="hours-filter" value="0-4"> 0 - 4</label>
+            <label class="filter-option"><input type="checkbox" class="hours-filter" value="5-9"> 5 - 9</label>
+            <label class="filter-option"><input type="checkbox" class="hours-filter" value="10-14"> 10 - 14</label>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">Continued Despite Problems</div>
+            <label class="filter-option"><input type="checkbox" class="continued-filter" value="TRUE"> YES</label>
+            <label class="filter-option"><input type="checkbox" class="continued-filter" value="FALSE"> NO</label>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">Loss of Other Interests</div>
+            <label class="filter-option"><input type="checkbox" class="loss-filter" value="TRUE"> YES</label>
+            <label class="filter-option"><input type="checkbox" class="loss-filter" value="FALSE"> NO</label>
+        </div>
 
     </div>
 
 </div>
 
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">Distribution — Addiction Risk Level</div>
-        <div id="chart-risk-dist" style="height:220px"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Distribution — Daily Gaming Hours</div>
-        <div id="chart-hours-dist" style="height:220px"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Distribution — Social Isolation</div>
-        <div id="chart-genre" style="height:220px"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Percentage of Gaming Platform Usage</div>
-        <div id="chart-platform" style="height:220px"></div>
-      </div>
-      <div class="card">
+<div class="grid-2">
 
-  <div class="card-title">
-    Distribution — Player Age
+  <div
+    class="card chart-preview"
+    onclick="openChart('riskDist')"
+  >
+    <div class="card-title">
+      Distribution — Addiction Risk Level
+    </div>
+
+    <div id="chart-risk-dist" style="height:220px"></div>
   </div>
 
-  <div id="chart-age-dist" style="height:220px"></div>
+  <div
+    class="card chart-preview"
+    onclick="openChart('hoursDist')"
+  >
+    <div class="card-title">
+      Distribution — Daily Gaming Hours
+    </div>
 
-</div>
-
-<div class="card">
-
-  <div class="card-title">
-    Distribution — Monthly Spending USD
+    <div id="chart-hours-dist" style="height:220px"></div>
   </div>
 
-  <div id="chart-spending-dist" style="height:220px"></div>
+  <div
+    class="card chart-preview"
+    onclick="openChart('isolation')"
+  >
+    <div class="card-title">
+      Distribution — Social Isolation
+    </div>
+
+    <div id="chart-genre" style="height:220px"></div>
+  </div>
+
+  <div
+    class="card chart-preview"
+    onclick="openChart('platform')"
+  >
+    <div class="card-title">
+      Percentage of Gaming Platform Usage
+    </div>
+
+    <div id="chart-platform" style="height:220px"></div>
+  </div>
+
+  <div
+    class="card chart-preview"
+    onclick="openChart('ageDist')"
+  >
+    <div class="card-title">
+      Distribution — Player Age
+    </div>
+
+    <div id="chart-age-dist" style="height:220px"></div>
+  </div>
+
+  <div
+    class="card chart-preview"
+    onclick="openChart('spendingDist')"
+  >
+    <div class="card-title">
+      Distribution — Monthly Spending USD
+    </div>
+
+    <div id="chart-spending-dist" style="height:220px"></div>
+  </div>
 
 </div>
 
-
-    </div>
   </section>
 
   <!-- ===== OBJ 1 ===== -->
@@ -747,6 +444,119 @@
       The selection of k=4 is justified by contextual coherence with addiction categories.
     </p>
   </div>
+
+  <!-- ====================================== -->
+<!-- CLUSTER SUMMARY KPIs -->
+<!-- ====================================== -->
+
+<div
+    class="grid-4"
+    style="margin-bottom:1.5rem"
+>
+
+    <!-- CLUSTERS -->
+
+    <div class="kpi-card">
+
+        <span class="kpi-label">
+            Optimal Clusters
+        </span>
+
+        <span
+            class="kpi-value"
+            style="color:var(--accent)"
+        >
+            K = 4
+        </span>
+
+        <span class="kpi-sub">
+            Elbow method selection
+        </span>
+
+    </div>
+
+    <!-- HIGH RISK -->
+
+    <div class="kpi-card">
+
+        <span class="kpi-label">
+            High-Risk Cluster
+        </span>
+
+        <span
+            class="kpi-value"
+            style="color:var(--danger)"
+        >
+            Cluster 3
+        </span>
+
+        <span class="kpi-sub">
+            Severe deterioration profile
+        </span>
+
+    </div>
+
+    <!-- LOW RISK -->
+
+    <div class="kpi-card">
+
+        <span class="kpi-label">
+            Healthy Cluster
+        </span>
+
+        <span
+            class="kpi-value"
+            style="color:var(--low)"
+        >
+            Cluster 0
+        </span>
+
+        <span class="kpi-sub">
+            Balanced lifestyle profile
+        </span>
+
+    </div>
+
+    <!-- MAIN VARIABLE -->
+
+    <div class="kpi-card">
+
+        <span class="kpi-label">
+            Most Influential Variable
+        </span>
+
+        <span
+            class="kpi-value"
+            style="color:var(--purple)"
+        >
+            Gaming Hours
+        </span>
+
+        <span class="kpi-sub">
+            Main segmentation factor
+        </span>
+
+    </div>
+
+</div>
+
+  <!-- ===================================================== -->
+<!-- ELBOW METHOD -->
+<!-- ===================================================== -->
+
+<div class="viz-card">
+
+    <div class="chart-header">
+
+        <div class="chart-title">
+            Optimal Number of Clusters — Elbow Method
+        </div>
+
+    </div>
+
+    <div id="chart-elbow-method"></div>
+
+</div>
   
 <div class="cluster-grid" style="margin-bottom:1.5rem">
 
@@ -895,7 +705,7 @@
   <span class="cluster-badge"
     style="
       background:rgba(234,179,8,.12);
-      color:var(--moderate)
+      color:var(--moderate2)
     ">
     Cluster 1
   </span>
@@ -1321,68 +1131,192 @@
     </div>
   </section>
 
-      </div>
-
-</section>
 
   <!-- ===== OBJ 3 ===== -->
-  <section id="obj3" class="section">
+<section id="obj3" class="section">
+
+    <!-- ========================================== -->
+    <!-- HEADER -->
+    <!-- ========================================== -->
+
     <div class="section-header">
-      <div class="section-tag">Objective 3 · Multiple Linear Regression</div>
-      <div class="section-title">Addiction Risk Level Estimation</div>
-      <p class="section-desc">
-        Linear regression model trained with 6 predictive variables on 800 records and evaluated on 200 testing records.
-      </p>
-    </div>
 
-    <div class="grid-4" style="margin-bottom:1.5rem">
+        <div class="section-tag">
+            OBJECTIVE 3 · MULTIPLE LINEAR REGRESSION
+        </div>
 
-      <div class="kpi-card">
-        <span class="kpi-label">R² Score</span>
-        <span class="kpi-value" style="color:var(--accent3)">0.9429</span>
-        <span class="kpi-sub">Explained variability: 94.29%</span>
-      </div>
+        <div class="section-title">
+            Addiction Risk Level Estimation
+        </div>
 
-      <div class="kpi-card">
-        <span class="kpi-label">MAE</span>
-        <span class="kpi-value" style="color:var(--accent)">0.2195</span>
-        <span class="kpi-sub">Mean absolute error</span>
-      </div>
-
-      <div class="kpi-card">
-        <span class="kpi-label">RMSE</span>
-        <span class="kpi-value" style="color:var(--accent2)">0.2709</span>
-        <span class="kpi-sub">Root mean square error</span>
-      </div>
-
-      <div class="kpi-card">
-        <span class="kpi-label">Best predictor</span>
-        <span class="kpi-value" style="color:var(--purple);font-size:1rem">withdrawal</span>
-        <span class="kpi-sub">Coefficient: 0.988</span>
-      </div>
+        <p class="section-desc">
+            Linear regression model trained with
+            6 predictive variables on 800 records
+            and evaluated on 200 testing records.
+        </p>
 
     </div>
 
+    <!-- ========================================== -->
+    <!-- KPI CARDS -->
+    <!-- ========================================== -->
+
+    <div
+        class="grid-4"
+        style="margin-bottom:1.5rem"
+    >
+
+        <!-- R2 -->
+
+        <div class="kpi-card">
+
+            <span class="kpi-label">
+                R² Score
+            </span>
+
+            <span
+                class="kpi-value"
+                style="color:var(--accent3)"
+            >
+                0.9429
+            </span>
+
+            <span class="kpi-sub">
+                Explained variability: 94.29%
+            </span>
+
+        </div>
+
+        <!-- MAE -->
+
+        <div class="kpi-card">
+
+            <span class="kpi-label">
+                MAE
+            </span>
+
+            <span
+                class="kpi-value"
+                style="color:var(--accent)"
+            >
+                0.2195
+            </span>
+
+            <span class="kpi-sub">
+                Mean absolute error
+            </span>
+
+        </div>
+
+        <!-- RMSE -->
+
+        <div class="kpi-card">
+
+            <span class="kpi-label">
+                RMSE
+            </span>
+
+            <span
+                class="kpi-value"
+                style="color:var(--accent2)"
+            >
+                0.2709
+            </span>
+
+            <span class="kpi-sub">
+                Root mean square error
+            </span>
+
+        </div>
+
+        <!-- BEST PREDICTOR -->
+
+        <div class="kpi-card">
+
+            <span class="kpi-label">
+                Best predictor
+            </span>
+
+            <span
+                class="kpi-value"
+                style="
+                    color:var(--purple);
+                    font-size:1rem
+                "
+            >
+                Withdrawal Symptoms
+            </span>
+
+            <span class="kpi-sub">
+                Coefficient: 0.988
+            </span>
+
+        </div>
+
+    </div>
+
+<!-- ========================================== -->
+<!-- MAIN FULL WIDTH CHART -->
+<!-- ========================================== -->
+
+<div
+    class="viz-card"
+    style="margin-bottom:1.5rem"
+>
+
+    <div class="chart-header">
+
+        <div class="chart-title">
+            REGRESSION MODEL COEFFICIENTS
+        </div>
+
+    </div>
+
+    <div id="chart-coef-full"></div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- SECONDARY CHARTS -->
+<!-- ========================================== -->
 
 <div class="grid-2">
 
-  <div class="card">
-    <div class="card-title">
-      Regression Model Coefficients
+    <!-- COMPARISON -->
+
+    <div class="viz-card">
+
+        <div class="chart-header">
+
+            <div class="chart-title">
+                RESIDUAL DISTRIBUTION
+            </div>
+
+        </div>
+
+        <div id="chart-residuals"></div>
+
     </div>
 
-    <div id="chart-coef"></div>
-  </div>
+    <!-- PREDICTIONS -->
 
-  <div class="card">
-    <div class="card-title">
-      Coefficient Comparison
+    <div class="viz-card">
+
+        <div class="chart-header">
+
+            <div class="chart-title">
+                REAL VS PREDICTED VALUES
+            </div>
+
+        </div>
+
+        <div id="chart-predictions"></div>
+
     </div>
 
-    <div id="chart-coef-compare"></div>
-  </div>
 </div>
-  </section>
+
+</section>
 
   <!-- ===== PREDICTOR ===== -->
   <section id="predictor" class="section">
@@ -1563,6 +1497,13 @@
     </div>
 
 </div>
+
+  <div id="fullscreen-modal" class="chart-modal hidden">
+    <div class="chart-modal-content">
+        <button id="close-fullscreen-modal">✕</button>
+        <div id="fullscreen-container" style="width:100%;min-height:700px"></div>
+    </div>
+  </div>
 
 
 
