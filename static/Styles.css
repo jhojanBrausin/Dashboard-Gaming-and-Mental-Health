@@ -676,6 +676,13 @@ svg{
     font-family: 'Inter', sans-serif;
 }
 
+.tooltip{
+
+    z-index:999999 !important;
+
+    pointer-events:none;
+}
+
 /* ===== OBJECTIVES ===== */
 .obj-card {
     background: var(--card);
