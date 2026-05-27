@@ -8,55 +8,64 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/styles.css?v=1">
 </head>
-<body class="sidebar-hidden">
+<body>
 
 <div class="tooltip" id="tooltip"></div>
 
 <div class="layout">
 
     <!-- ===== SIDEBAR ===== -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
 
-        <div class="sidebar-logo">
+        <!-- Botón hamburguesa solo en móvil -->
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
 
-            <div class="logo-circle">G</div>
+        <div class="sidebar-inner" id="sidebar-inner">
 
-            <div>
-                <div class="logo-title">Gaming & Mental Health</div>
-                <div class="logo-sub">Analytical Dashboard</div>
+            <div class="sidebar-logo">
+                <div class="logo-circle">G</div>
+                <div>
+                    <div class="logo-title">Gaming & Mental Health</div>
+                    <div class="logo-sub">Analytical Dashboard</div>
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+
+                <button class="nav-btn active" onclick="showSection('objetivos', this)">
+                    📌 Objectives
+                </button>
+
+                <button class="nav-btn" onclick="showSection('overview', this)">
+                    📊 Overview
+                </button>
+
+                <button class="nav-btn" onclick="showSection('obj1', this)">
+                    📈 Obj. 1 — Variables
+                </button>
+
+                <button class="nav-btn" onclick="showSection('obj2', this)">
+                    🧠 Obj. 2 — Clusters
+                </button>
+
+                <button class="nav-btn" onclick="showSection('obj3', this)">
+                    🤖 Obj. 3 — Regression
+                </button>
+
+                <button class="nav-btn" onclick="showSection('predictor', this)">
+                    🎮 Predictor
+                </button>
+
             </div>
 
         </div>
 
-        <div class="sidebar-menu">
-
-            <button class="nav-btn active" onclick="showSection('objetivos', this)">
-                📌 Objectives
-            </button>
-
-            <button class="nav-btn" onclick="showSection('overview', this)">
-                📊 Overview
-            </button>
-
-            <button class="nav-btn" onclick="showSection('obj1', this)">
-                📈 Obj. 1 — Variables
-            </button>
-
-            <button class="nav-btn" onclick="showSection('obj2', this)">
-                🧠 Obj. 2 — Clusters
-            </button>
-
-            <button class="nav-btn" onclick="showSection('obj3', this)">
-                🤖 Obj. 3— Regression
-            </button>
-
-            <button class="nav-btn" onclick="showSection('predictor', this)">
-                🎮 Predictor
-            </button>
-
-        </div>
-
     </aside>
+
+    <!-- Overlay para cerrar sidebar en móvil -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
     <!-- ===== CONTENT ===== -->
     <div class="content-area">
@@ -76,1493 +85,567 @@
                 on psychological well-being
             </p>
 
-<div class="header-stats">
+            <div class="header-stats">
 
-    <div class="hstat">
-        <span class="hstat-val">1,000</span>
-        <span class="hstat-label">
-            Records
-        </span>
-    </div>
+                <div class="hstat">
+                    <span class="hstat-val">1,000</span>
+                    <span class="hstat-label">Records</span>
+                </div>
 
-    <div class="hstat">
-        <span class="hstat-val">25</span>
-        <span class="hstat-label">
-            Variables
-        </span>
-    </div>
+                <div class="hstat">
+                    <span class="hstat-val">25</span>
+                    <span class="hstat-label">Variables</span>
+                </div>
 
-    <div class="hstat">
-        <span class="hstat-val">
-            Addiction Risk Level
-        </span>
-        <span class="hstat-label">
-            Main Variable
-        </span>
-    </div>
+                <div class="hstat">
+                    <span class="hstat-val">Addiction Risk Level</span>
+                    <span class="hstat-label">Main Variable</span>
+                </div>
 
-    <div class="hstat">
-        <span class="hstat-val">
-            Random Forest
-        </span>
-        <span class="hstat-label">
-            Model 1
-        </span>
-    </div>
+                <div class="hstat">
+                    <span class="hstat-val">Random Forest</span>
+                    <span class="hstat-label">Model 1</span>
+                </div>
 
-    <div class="hstat">
-        <span class="hstat-val">
-            K-Means
-        </span>
-        <span class="hstat-label">
-            Model 2
-        </span>
-    </div>
+                <div class="hstat">
+                    <span class="hstat-val">K-Means</span>
+                    <span class="hstat-label">Model 2</span>
+                </div>
 
-    <div class="hstat">
-        <span class="hstat-val">
-            Multiple Linear Regression
-        </span>
-        <span class="hstat-label">
-            Model 3
-        </span>
-    </div>
+                <div class="hstat">
+                    <span class="hstat-val">Multiple Linear Regression</span>
+                    <span class="hstat-label">Model 3</span>
+                </div>
 
-</div>
+            </div>
 
         </header>
 
-<main>
-
-  <!-- ===== OBJECTIVES ===== -->
-  <section id="objetivos" class="section active">
-    <div class="section-header">
-      <div class="section-tag">Phase 1 — Business Understanding · CRISP-DM</div>
-      <div class="section-title">General and Specific Objectives</div>
-      <p class="section-desc">Analyze video game player behavior and its relationship with mental health through the CRISP-DM methodology and data mining techniques, identifying gaming and lifestyle patterns that influence addiction risk and psychological well-being dimensions.</p>
-    </div>
-
-    <div class="obj-card">
-      <div class="obj-number">01</div>
-      <div class="obj-tag">Specific Objective 1</div>
-      <div class="obj-title">Examine the dataset under the CRISP-DM methodology</div>
-      <ul class="meta-list">
-        <li class="meta-item"><span class="meta-dot"></span>A higher number of daily gaming hours <code>daily_gaming_hours</code> is associated with a higher addiction risk level</li>
-        <li class="meta-item"><span class="meta-dot"></span>The presence of withdrawal symptoms <code>withdrawal_symptoms</code> increases the probability of high-risk classification</li>
-        <li class="meta-item"><span class="meta-dot"></span>A lower number of sleep hours <code>sleep_hours</code> reflects greater habit intensity and higher risk</li>
-        <li class="meta-item"><span class="meta-dot"></span>A high social isolation score <code>social_isolation_score</code> predicts high-risk player profiles</li>
-      </ul>
-      <span class="result-badge badge-success">✅ Objective achieved — Random Forest 65% accuracy · Correlation &gt; 0.60</span>
-    </div>
-
-    <div class="obj-card">
-      <div class="obj-number">02</div>
-      <div class="obj-tag">Specific Objective 2</div>
-      <div class="obj-title">Segment players according to physical and mental health impact</div>
-      <ul class="meta-list">
-        <li class="meta-item"><span class="meta-dot"></span>Players with higher <code>daily_gaming_hours</code> and lower <code>sleep_quality</code> show higher <code>social_isolation_score</code></li>
-        <li class="meta-item"><span class="meta-dot"></span>Players with lower <code>daily_gaming_hours</code> and higher <code>exercise_hours_weekly</code> show higher <code>face_to_face_social_hours_weekly</code></li>
-        <li class="meta-item"><span class="meta-dot"></span>Older players with more <code>years_gaming</code> show differentiated <code>monthly_game_spending_usd</code></li>
-        <li class="meta-item"><span class="meta-dot"></span>Players with higher <code>daily_gaming_hours</code> show higher <code>weight_change_kg</code> and <code>mood_swing_frequency</code></li>
-      </ul>
-      <span class="result-badge badge-success">✅ Objective achieved — K-Means k=4 · 4 differentiated profiles</span>
-    </div>
-
-    <div class="obj-card">
-      <div class="obj-number">03</div>
-      <div class="obj-tag">Specific Objective 3</div>
-      <div class="obj-title">Build a regression model to estimate risk level</div>
-      <ul class="meta-list">
-        <li class="meta-item"><span class="meta-dot"></span><code>daily_gaming_hours</code> and <code>withdrawal_symptoms</code> are the strongest predictors</li>
-        <li class="meta-item"><span class="meta-dot"></span>The combination of <code>loss_of_other_interests</code> and <code>continued_despite_problems</code> improves predictive capability</li>
-        <li class="meta-item"><span class="meta-dot"></span>Low <code>sleep_quality</code> combined with high <code>social_isolation_score</code> contributes to estimating medium and high-risk levels</li>
-        <li class="meta-item"><span class="meta-dot"></span>The model achieves acceptable performance measured with R², MAE, and RMSE</li>
-      </ul>
-      <span class="result-badge badge-success">✅ Objective achieved — R²=0.9429 · MAE=0.2195 · RMSE=0.2709</span>
-    </div>
-  </section>
-<!-- ===== OVERVIEW ===== -->
-  <section id="overview" class="section">
-    <div class="section-header">
-      <div class="section-tag">Dataset overview</div>
-      <div class="section-title">Distribution of Key Variables</div>
-      <p class="section-desc">Descriptive statistics and distribution of addiction risk levels among the 1,000 analyzed players.</p>
-    </div>
-
-<div class="grid-4" style="margin-bottom:1.5rem">
-
-  <div class="kpi-card">
-    <span class="kpi-label">Gaming hours / day</span>
-    <span id="kpi-hours" class="kpi-value" style="color:var(--accent)">--</span>
-    <span id="kpi-hours-sub" class="kpi-sub">Loading...</span>
-  </div>
-
-  <div class="kpi-card">
-    <span class="kpi-label">Sleep hours / night</span>
-    <span id="kpi-sleep" class="kpi-value" style="color:var(--accent3)">--</span>
-    <span id="kpi-sleep-sub" class="kpi-sub">Loading...</span>
-  </div>
-
-  <div class="kpi-card">
-    <span class="kpi-label">Social isolation</span>
-    <span id="kpi-isolation" class="kpi-value" style="color:var(--accent2)">--</span>
-    <span id="kpi-isolation-sub" class="kpi-sub">Loading...</span>
-  </div>
-
-  <div class="kpi-card">
-    <span class="kpi-label">Monthly spending USD</span>
-    <span id="kpi-spending" class="kpi-value" style="color:var(--purple)">--</span>
-    <span id="kpi-spending-sub" class="kpi-sub">Loading...</span>
-  </div>
-
-</div>
-
-<div class="overview-filter-wrap">
-
-    <button id="filter-toggle-btn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 5h18 L14 14v5 l-4 2v-7 L3 5z"/>
-        </svg>
-        Filters
-    </button>
-
-    <div id="overview-filter-panel" class="hidden">
-
-        <div class="filter-group">
-            <div class="filter-title">Addiction Risk Level</div>
-            <label class="filter-option"><input type="checkbox" class="risk-filter" value="Low"> Low</label>
-            <label class="filter-option"><input type="checkbox" class="risk-filter" value="Moderate"> Moderate</label>
-            <label class="filter-option"><input type="checkbox" class="risk-filter" value="High"> High</label>
-            <label class="filter-option"><input type="checkbox" class="risk-filter" value="Severe"> Severe</label>
-        </div>
-
-        <div class="filter-group">
-            <div class="filter-title">Age</div>
-            <label class="filter-option"><input type="checkbox" class="age-filter" value="10-15"> 10 - 15</label>
-            <label class="filter-option"><input type="checkbox" class="age-filter" value="16-21"> 16 - 21</label>
-            <label class="filter-option"><input type="checkbox" class="age-filter" value="22-27"> 22 - 27</label>
-            <label class="filter-option"><input type="checkbox" class="age-filter" value="28-35"> 28 - 35</label>
-        </div>
-
-        <div class="filter-group">
-            <div class="filter-title">Withdrawal Symptoms</div>
-            <label class="filter-option"><input type="checkbox" class="withdrawal-filter" value="TRUE"> YES</label>
-            <label class="filter-option"><input type="checkbox" class="withdrawal-filter" value="FALSE"> NO</label>
-        </div>
-
-        <div class="filter-group">
-            <div class="filter-title">Daily Gaming Hours</div>
-            <label class="filter-option"><input type="checkbox" class="hours-filter" value="0-4"> 0 - 4</label>
-            <label class="filter-option"><input type="checkbox" class="hours-filter" value="5-9"> 5 - 9</label>
-            <label class="filter-option"><input type="checkbox" class="hours-filter" value="10-14"> 10 - 14</label>
-        </div>
-
-        <div class="filter-group">
-            <div class="filter-title">Continued Despite Problems</div>
-            <label class="filter-option"><input type="checkbox" class="continued-filter" value="TRUE"> YES</label>
-            <label class="filter-option"><input type="checkbox" class="continued-filter" value="FALSE"> NO</label>
-        </div>
-
-        <div class="filter-group">
-            <div class="filter-title">Loss of Other Interests</div>
-            <label class="filter-option"><input type="checkbox" class="loss-filter" value="TRUE"> YES</label>
-            <label class="filter-option"><input type="checkbox" class="loss-filter" value="FALSE"> NO</label>
-        </div>
-
-    </div>
-
-</div>
-
-<div class="grid-2">
-
-  <div
-    class="card chart-preview"
-    onclick="openChart('riskDist')"
-  >
-    <div class="card-title">
-      Distribution — Addiction Risk Level
-    </div>
-
-    <div id="chart-risk-dist" style="height:220px"></div>
-  </div>
-
-  <div
-    class="card chart-preview"
-    onclick="openChart('hoursDist')"
-  >
-    <div class="card-title">
-      Distribution — Daily Gaming Hours
-    </div>
-
-    <div id="chart-hours-dist" style="height:220px"></div>
-  </div>
-
-  <div
-    class="card chart-preview"
-    onclick="openChart('isolation')"
-  >
-    <div class="card-title">
-      Distribution — Social Isolation
-    </div>
-
-    <div id="chart-genre" style="height:220px"></div>
-  </div>
-
-  <div
-    class="card chart-preview"
-    onclick="openChart('platform')"
-  >
-    <div class="card-title">
-      Percentage of Gaming Platform Usage
-    </div>
-
-    <div id="chart-platform" style="height:220px"></div>
-  </div>
-
-  <div
-    class="card chart-preview"
-    onclick="openChart('ageDist')"
-  >
-    <div class="card-title">
-      Distribution — Player Age
-    </div>
-
-    <div id="chart-age-dist" style="height:220px"></div>
-  </div>
-
-  <div
-    class="card chart-preview"
-    onclick="openChart('spendingDist')"
-  >
-    <div class="card-title">
-      Distribution — Monthly Spending USD
-    </div>
-
-    <div id="chart-spending-dist" style="height:220px"></div>
-  </div>
-
-</div>
-
-  </section>
-
-  <!-- ===== OBJ 1 ===== -->
-  <section id="obj1" class="section">
-    <div class="section-header">
-      <div class="section-tag">Objective 1 · Random Forest + Correlation</div>
-      <div class="section-title">Identify Influential Variables in Addiction Risk</div>
-      <p class="section-desc">Analysis of the relative importance of each variable and its correlation with addiction risk level using Random Forest and a correlation matrix.</p>
-    </div>
-
-    <div class="grid-4" style="margin-bottom:1.5rem">
-      <div class="kpi-card">
-        <span class="kpi-label">Random Forest Accuracy</span>
-        <span class="kpi-value" style="color:var(--accent)">65%</span>
-        <span class="kpi-sub">With 4 variables · 200 test samples</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-label">daily_gaming_hours</span>
-        <span class="kpi-value" style="color:var(--accent2)">53%</span>
-        <span class="kpi-sub">Relative importance</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-label">Max correlation</span>
-        <span class="kpi-value" style="color:var(--accent3)">0.81</span>
-        <span class="kpi-sub">daily_gaming_hours ↔ risk</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-label">sleep_hours ↔ risk</span>
-        <span class="kpi-value" style="color:var(--accent)">-0.61</span>
-        <span class="kpi-sub">Negative correlation</span>
-      </div>
-    </div>
-
-<div class="card col-span-2">
-
-  <div class="card-title">
-    Correlation Heatmap — Objective 1 Variables
-  </div>
-
-  <div id="chart-heatmap"></div>
-
-</div>
-
-<div class="grid-2">
-
-    <div
-        class="card chart-preview"
-        onclick="openChart('violin')"
-    >
-
-        <div class="card-title">
-            Distribution of Daily Gaming Hours by Addiction Risk Level
-        </div>
-
-        <div id="preview-violin"></div>
-
-    </div>
-
-    <div
-        class="card chart-preview"
-        onclick="openChart('withdrawal')"
-    >
-
-        <div class="card-title">
-            Withdrawal Symptoms by Addiction Risk Level
-        </div>
-
-        <div id="preview-withdrawal"></div>
-
-    </div>
-
-    <div
-        class="card chart-preview"
-        onclick="openChart('boxplot')"
-    >
-
-        <div class="card-title">
-            Social Isolation by Addiction Risk Level
-        </div>
-
-        <div id="preview-boxplot"></div>
-
-    </div>
-
-    <div
-        class="card chart-preview"
-        onclick="openChart('gamingIsolation')"
-    >
-
-        <div class="card-title">
-            Daily Gaming Hours by Social Isolation Level
-        </div>
-
-        <div id="preview-gaming-isolation"></div>
-
-    </div>
-
-</div>
-
-<div class="card col-span-2">
-
-      <div class="card">
-        <div class="card-title">Variable Importance — Random Forest</div>
-        <div id="chart-importance"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== OBJ 2 ===== -->
-<!-- ===== OBJ 2 ===== -->
-<section id="obj2" class="section">
-
-  <div class="section-header">
-    <div class="section-tag">
-      Objective 2 · K-Means Clustering · K=4
-    </div>
-
-    <div class="section-title">
-      Player Segmentation by Physical and Mental Health
-    </div>
-
-    <p class="section-desc">
-      Four differentiated profiles identified using K-Means clustering.
-      The selection of k=4 is justified by contextual coherence with addiction categories.
-    </p>
-  </div>
-
-  <!-- ====================================== -->
-<!-- CLUSTER SUMMARY KPIs -->
-<!-- ====================================== -->
-
-<div
-    class="grid-4"
-    style="margin-bottom:1.5rem"
->
-
-    <!-- CLUSTERS -->
-
-    <div class="kpi-card">
-
-        <span class="kpi-label">
-            Optimal Clusters
-        </span>
-
-        <span
-            class="kpi-value"
-            style="color:var(--accent)"
-        >
-            K = 4
-        </span>
-
-        <span class="kpi-sub">
-            Elbow method selection
-        </span>
-
-    </div>
-
-    <!-- HIGH RISK -->
-
-    <div class="kpi-card">
-
-        <span class="kpi-label">
-            High-Risk Cluster
-        </span>
-
-        <span
-            class="kpi-value"
-            style="color:var(--accent)"
-        >
-            Cluster 3
-        </span>
-
-        <span class="kpi-sub">
-            Severe deterioration profile
-        </span>
-
-    </div>
-
-    <!-- LOW RISK -->
-
-    <div class="kpi-card">
-
-        <span class="kpi-label">
-            Healthy Cluster
-        </span>
-
-        <span
-            class="kpi-value"
-            style="color:var(--accent)"
-        >
-            Cluster 0
-        </span>
-
-        <span class="kpi-sub">
-            Balanced lifestyle profile
-        </span>
-
-    </div>
-
-    <!-- MAIN VARIABLE -->
-
-    <div class="kpi-card">
-
-        <span class="kpi-label">
-            Most Influential Variable
-        </span>
-
-        <span
-            class="kpi-value"
-            style="color:var(--purple)"
-        >
-            Gaming Hours
-        </span>
-
-        <span class="kpi-sub">
-            Main segmentation factor
-        </span>
-
-    </div>
-
-</div>
-
-  <!-- ===================================================== -->
-<!-- ELBOW METHOD -->
-<!-- ===================================================== -->
-
-<div class="viz-card">
-
-    <div class="chart-header">
-
-        <div class="chart-title">
-            Optimal Number of Clusters — Elbow Method
-        </div>
-
-    </div>
-
-    <div id="chart-elbow-method"></div>
-
-</div>
-  
-<div class="cluster-grid" style="margin-bottom:1.5rem">
-
-
-<!-- ===================================================== -->
-<!-- CLUSTER 0 -->
-<!-- ===================================================== -->
-
-<div class="cluster-card">
-
-  <span class="cluster-badge"
-    style="
-      background:rgba(16,185,129,.12);
-      color:var(--low)
-    ">
-    Cluster 0
-  </span>
-
-  <div class="cluster-name">
-    Young Casual and Healthy Player
-  </div>
-
-  <div class="cluster-stats">
-
-    <div class="cstat">
-      <span class="cstat-label">Gaming hours/day</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:27%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val">4.14h</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Exercise/week</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:73%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val">8.00h</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Social isolation</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:25%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val">2.50</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Spending/month</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:18%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val">$51</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Gaming intensity</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:35%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Low</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Sleep deterioration</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:12%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Very Low</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Economic spending</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:20%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Low</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Withdrawal symptoms</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:5%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val">None</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Average risk</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:2%;background:var(--low)">
-        </div>
-      </div>
-
-      <span class="cstat-val"
-        style="color:var(--low)">
-        0.02 Low
-      </span>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- ===================================================== -->
-<!-- CLUSTER 1 -->
-<!-- ===================================================== -->
-
-<div class="cluster-card">
-
-  <span class="cluster-badge"
-    style="
-      background:rgba(234,179,8,.12);
-      color:var(--moderate2)
-    ">
-    Cluster 1
-  </span>
-
-  <div class="cluster-name">
-    Intermediate Player with Signs of Deterioration
-  </div>
-
-  <div class="cluster-stats">
-
-    <div class="cstat">
-      <span class="cstat-label">Gaming hours/day</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:50%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val">7.53h</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Exercise/week</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:57%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val">6.23h</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Social isolation</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:48%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val">4.78</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Spending/month</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:32%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val">$91</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Gaming intensity</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:60%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Moderate</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Sleep deterioration</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:52%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Medium</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Economic spending</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:38%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Moderate</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Withdrawal symptoms</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:61%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Present</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Average risk</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:34%;background:var(--moderate)">
-        </div>
-      </div>
-
-      <span class="cstat-val"
-        style="color:var(--moderate)">
-        1.03 Moderate
-      </span>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- ===================================================== -->
-<!-- CLUSTER 2 -->
-<!-- ===================================================== -->
-
-<div class="cluster-card">
-
-  <span class="cluster-badge"
-    style="
-      background:rgba(249,115,22,.12);
-      color:var(--high)
-    ">
-    Cluster 2
-  </span>
-
-  <div class="cluster-name">
-    Stable Veteran Player
-  </div>
-
-  <div class="cluster-stats">
-
-    <div class="cstat">
-      <span class="cstat-label">Gaming hours/day</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:28%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val">4.16h</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Exercise/week</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:72%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val">7.81h</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Social isolation</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:26%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val">2.60</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Spending/month</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:18%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val">$52</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Gaming intensity</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:30%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Low</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Sleep deterioration</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:18%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Very Low</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Economic spending</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:22%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Low</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Withdrawal symptoms</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:6%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Rare</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Average risk</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:2%;background:var(--high)">
-        </div>
-      </div>
-
-      <span class="cstat-val"
-        style="color:var(--high)">
-        0.01 Low
-      </span>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- ===================================================== -->
-<!-- CLUSTER 3 -->
-<!-- ===================================================== -->
-
-<div class="cluster-card">
-
-  <span class="cluster-badge"
-    style="
-      background:rgba(239,68,68,.12);
-      color:var(--danger)
-    ">
-    Cluster 3
-  </span>
-
-  <div class="cluster-name">
-    High-Risk Player — Severe Deterioration
-  </div>
-
-  <div class="cluster-stats">
-
-    <div class="cstat">
-      <span class="cstat-label">Gaming hours/day</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:71%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val">10.71h</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Exercise/week</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:43%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val">4.71h</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Social isolation</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:70%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val">6.96</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Spending/month</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:91%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val">$319</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Gaming intensity</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:92%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Extreme</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Sleep deterioration</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:88%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Severe</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Economic spending</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:95%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Very High</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Withdrawal symptoms</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:90%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val">Severe</span>
-    </div>
-
-    <div class="cstat">
-      <span class="cstat-label">Average risk</span>
-
-      <div class="cstat-bar-wrap">
-        <div class="cstat-bar"
-          style="width:84%;background:var(--danger)">
-        </div>
-      </div>
-
-      <span class="cstat-val"
-        style="color:var(--danger)">
-        2.51 High-Severe
-      </span>
-    </div>
-
-  </div>
-
-</div>
-
-</div>
-    <div class="card">
-      <div class="card-title">Centroid Comparison by Variable</div>
-      <div id="cluster-filters" class="cluster-filters">
-
-    <button class="cluster-btn active"
-        data-cluster="0">
-        Balanced
-    </button>
-
-    <button class="cluster-btn active"
-        data-cluster="1">
-        Moderate Risk
-    </button>
-
-    <button class="cluster-btn active"
-        data-cluster="2">
-        Veteran Stable
-    </button>
-
-    <button class="cluster-btn active"
-        data-cluster="3">
-        Severe Addiction
-    </button>
-
-</div>
-      <div id="chart-clusters"></div>
-    </div>
-  </section>
-
-
-  <!-- ===== OBJ 3 ===== -->
-<section id="obj3" class="section">
-
-    <!-- ========================================== -->
-    <!-- HEADER -->
-    <!-- ========================================== -->
-
-    <div class="section-header">
-
-        <div class="section-tag">
-            OBJECTIVE 3 · MULTIPLE LINEAR REGRESSION
-        </div>
-
-        <div class="section-title">
-            Addiction Risk Level Estimation
-        </div>
-
-        <p class="section-desc">
-            Linear regression model trained with
-            6 predictive variables on 800 records
-            and evaluated on 200 testing records.
-        </p>
-
-    </div>
-
-    <!-- ========================================== -->
-    <!-- KPI CARDS -->
-    <!-- ========================================== -->
-
-    <div
-        class="grid-4"
-        style="margin-bottom:1.5rem"
-    >
-
-        <!-- R2 -->
-
-        <div class="kpi-card">
-
-            <span class="kpi-label">
-                R² Score
-            </span>
-
-            <span
-                class="kpi-value"
-                style="color:var(--accent3)"
-            >
-                0.9429
-            </span>
-
-            <span class="kpi-sub">
-                Explained variability: 94.29%
-            </span>
-
-        </div>
-
-        <!-- MAE -->
-
-        <div class="kpi-card">
-
-            <span class="kpi-label">
-                MAE
-            </span>
-
-            <span
-                class="kpi-value"
-                style="color:var(--accent)"
-            >
-                0.2195
-            </span>
-
-            <span class="kpi-sub">
-                Mean absolute error
-            </span>
-
-        </div>
-
-        <!-- RMSE -->
-
-        <div class="kpi-card">
-
-            <span class="kpi-label">
-                RMSE
-            </span>
-
-            <span
-                class="kpi-value"
-                style="color:var(--accent2)"
-            >
-                0.2709
-            </span>
-
-            <span class="kpi-sub">
-                Root mean square error
-            </span>
-
-        </div>
-
-        <!-- BEST PREDICTOR -->
-
-        <div class="kpi-card">
-
-            <span class="kpi-label">
-                Best predictor
-            </span>
-
-            <span
-                class="kpi-value"
-                style="
-                    color:var(--purple);
-                    font-size:1rem
-                "
-            >
-                Withdrawal Symptoms
-            </span>
-
-            <span class="kpi-sub">
-                Coefficient: 0.988
-            </span>
-
-        </div>
-
-    </div>
-
-<!-- ========================================== -->
-<!-- MAIN FULL WIDTH CHART -->
-<!-- ========================================== -->
-
-<div
-    class="viz-card"
-    style="margin-bottom:1.5rem"
->
-
-    <div class="chart-header">
-
-        <div class="chart-title">
-            REGRESSION MODEL COEFFICIENTS
-        </div>
-
-    </div>
-
-    <div id="chart-coef-full"></div>
-
-</div>
-
-<!-- ========================================== -->
-<!-- SECONDARY CHARTS -->
-<!-- ========================================== -->
-
-<div class="grid-2">
-
-    <!-- COMPARISON -->
-
-    <div class="viz-card">
-
-        <div class="chart-header">
-
-            <div class="chart-title">
-                RESIDUAL DISTRIBUTION
+        <main>
+
+          <!-- ===== OBJECTIVES ===== -->
+          <section id="objetivos" class="section active">
+            <div class="section-header">
+              <div class="section-tag">Phase 1 — Business Understanding · CRISP-DM</div>
+              <div class="section-title">General and Specific Objectives</div>
+              <p class="section-desc">Analyze video game player behavior and its relationship with mental health through the CRISP-DM methodology and data mining techniques, identifying gaming and lifestyle patterns that influence addiction risk and psychological well-being dimensions.</p>
             </div>
 
-        </div>
-
-        <div id="chart-residuals"></div>
-
-    </div>
-
-    <!-- PREDICTIONS -->
-
-    <div class="viz-card">
-
-        <div class="chart-header">
-
-            <div class="chart-title">
-                REAL VS PREDICTED VALUES
+            <div class="obj-card">
+              <div class="obj-number">01</div>
+              <div class="obj-tag">Specific Objective 1</div>
+              <div class="obj-title">Examine the dataset under the CRISP-DM methodology</div>
+              <ul class="meta-list">
+                <li class="meta-item"><span class="meta-dot"></span>A higher number of daily gaming hours <code>daily_gaming_hours</code> is associated with a higher addiction risk level</li>
+                <li class="meta-item"><span class="meta-dot"></span>The presence of withdrawal symptoms <code>withdrawal_symptoms</code> increases the probability of high-risk classification</li>
+                <li class="meta-item"><span class="meta-dot"></span>A lower number of sleep hours <code>sleep_hours</code> reflects greater habit intensity and higher risk</li>
+                <li class="meta-item"><span class="meta-dot"></span>A high social isolation score <code>social_isolation_score</code> predicts high-risk player profiles</li>
+              </ul>
+              <span class="result-badge badge-success">✅ Objective achieved — Random Forest 65% accuracy · Correlation &gt; 0.60</span>
             </div>
 
-        </div>
-
-        <div id="chart-predictions"></div>
-
-    </div>
-
-</div>
-
-</section>
-
-  <!-- ===== PREDICTOR ===== -->
-  <section id="predictor" class="section">
-
-    <div class="section-header">
-      <div class="section-tag">Deployment · Interactive Tool</div>
-      <div class="section-title">Addiction Risk Predictor</div>
-      <p class="section-desc">
-        Enter your data to estimate your video game addiction risk level.
-        Results are indicative and do not replace professional evaluation.
-      </p>
-    </div>
-
-    <div class="grid-2">
-
-      <div class="card">
-
-        <div class="card-title">Enter your data</div>
-
-        <div class="predictor-form">
-
-          <div class="form-group">
-            <label class="form-label">Daily gaming hours</label>
-            <input class="form-input" id="p-hours" type="number" min="0.5" max="15" step="0.5" placeholder="ex: 5.5" oninput="validateNum(this,0.5,15)">
-            <span class="form-hint">Range: 0.5 — 15 hours</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Sleep quality</label>
-            <select class="form-select" id="p-sleep">
-              <option value="">Select...</option>
-              <option value="0">0 — Very poor</option>
-              <option value="1">1 — Poor</option>
-              <option value="2">2 — Fair</option>
-              <option value="3">3 — Good</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Withdrawal symptoms?</label>
-            <select class="form-select" id="p-withdrawal">
-              <option value="">Select...</option>
-              <option value="0">0 — No</option>
-              <option value="1">1 — Yes</option>
-            </select>
-            <span class="form-hint">Irritability when unable to play</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Loss of other interests?</label>
-            <select class="form-select" id="p-loss">
-              <option value="">Select...</option>
-              <option value="0">0 — No</option>
-              <option value="1">1 — Yes</option>
-            </select>
-            <span class="form-hint">You stopped activities you previously enjoyed</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Continue despite problems?</label>
-            <select class="form-select" id="p-continued">
-              <option value="">Select...</option>
-              <option value="0">0 — No</option>
-              <option value="1">1 — Yes</option>
-            </select>
-            <span class="form-hint">You keep playing despite negative consequences</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Social isolation (1-10)</label>
-            <input class="form-input" id="p-isolation" type="number" min="1" max="10" step="1" placeholder="ex: 4" oninput="validateNum(this,1,10)">
-            <span class="form-hint">1 = not isolated · 10 = completely isolated</span>
-          </div>
-
-        </div>
-
-        <button class="predict-btn" onclick="predict()">Calculate risk level</button>
-
-      </div>
-
-      <div class="card">
-
-        <div class="card-title">Prediction Result</div>
-
-        <div id="result-panel" class="result-panel">
-
-          <div id="result-level" class="result-level"></div>
-          <div id="result-score" class="result-score"></div>
-
-          <div class="risk-meter">
-
-            <div class="risk-bar-bg">
-              <div id="risk-fill" class="risk-bar-fill"></div>
+            <div class="obj-card">
+              <div class="obj-number">02</div>
+              <div class="obj-tag">Specific Objective 2</div>
+              <div class="obj-title">Segment players according to physical and mental health impact</div>
+              <ul class="meta-list">
+                <li class="meta-item"><span class="meta-dot"></span>Players with higher <code>daily_gaming_hours</code> and lower <code>sleep_quality</code> show higher <code>social_isolation_score</code></li>
+                <li class="meta-item"><span class="meta-dot"></span>Players with lower <code>daily_gaming_hours</code> and higher <code>exercise_hours_weekly</code> show higher <code>face_to_face_social_hours_weekly</code></li>
+                <li class="meta-item"><span class="meta-dot"></span>Older players with more <code>years_gaming</code> show differentiated <code>monthly_game_spending_usd</code></li>
+                <li class="meta-item"><span class="meta-dot"></span>Players with higher <code>daily_gaming_hours</code> show higher <code>weight_change_kg</code> and <code>mood_swing_frequency</code></li>
+              </ul>
+              <span class="result-badge badge-success">✅ Objective achieved — K-Means k=4 · 4 differentiated profiles</span>
             </div>
 
-            <div class="risk-labels">
-              <span>Low</span>
-              <span>Moderate</span>
-              <span>High</span>
-              <span>Severe</span>
+            <div class="obj-card">
+              <div class="obj-number">03</div>
+              <div class="obj-tag">Specific Objective 3</div>
+              <div class="obj-title">Build a regression model to estimate risk level</div>
+              <ul class="meta-list">
+                <li class="meta-item"><span class="meta-dot"></span><code>daily_gaming_hours</code> and <code>withdrawal_symptoms</code> are the strongest predictors</li>
+                <li class="meta-item"><span class="meta-dot"></span>The combination of <code>loss_of_other_interests</code> and <code>continued_despite_problems</code> improves predictive capability</li>
+                <li class="meta-item"><span class="meta-dot"></span>Low <code>sleep_quality</code> combined with high <code>social_isolation_score</code> contributes to estimating medium and high-risk levels</li>
+                <li class="meta-item"><span class="meta-dot"></span>The model achieves acceptable performance measured with R², MAE, and RMSE</li>
+              </ul>
+              <span class="result-badge badge-success">✅ Objective achieved — R²=0.9429 · MAE=0.2195 · RMSE=0.2709</span>
+            </div>
+          </section>
+
+          <!-- ===== OVERVIEW ===== -->
+          <section id="overview" class="section">
+            <div class="section-header">
+              <div class="section-tag">Dataset overview</div>
+              <div class="section-title">Distribution of Key Variables</div>
+              <p class="section-desc">Descriptive statistics and distribution of addiction risk levels among the 1,000 analyzed players.</p>
             </div>
 
-          </div>
-
-          <div id="result-msg" class="result-msg"></div>
-
-          <div class="metrics-row">
-
-            <div class="metric-chip">
-              <div class="metric-chip-val">0.9429</div>
-              <div class="metric-chip-label">R²</div>
+            <div class="grid-4" style="margin-bottom:1.5rem">
+              <div class="kpi-card">
+                <span class="kpi-label">Gaming hours / day</span>
+                <span id="kpi-hours" class="kpi-value" style="color:var(--accent)">--</span>
+                <span id="kpi-hours-sub" class="kpi-sub">Loading...</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Sleep hours / night</span>
+                <span id="kpi-sleep" class="kpi-value" style="color:var(--accent3)">--</span>
+                <span id="kpi-sleep-sub" class="kpi-sub">Loading...</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Social isolation</span>
+                <span id="kpi-isolation" class="kpi-value" style="color:var(--accent2)">--</span>
+                <span id="kpi-isolation-sub" class="kpi-sub">Loading...</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Monthly spending USD</span>
+                <span id="kpi-spending" class="kpi-value" style="color:var(--purple)">--</span>
+                <span id="kpi-spending-sub" class="kpi-sub">Loading...</span>
+              </div>
             </div>
 
-            <div class="metric-chip">
-              <div class="metric-chip-val">0.2195</div>
-              <div class="metric-chip-label">MAE</div>
+            <div class="overview-filter-wrap">
+                <button id="filter-toggle-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 5h18 L14 14v5 l-4 2v-7 L3 5z"/>
+                    </svg>
+                    Filters
+                </button>
+                <div id="overview-filter-panel" class="hidden">
+                    <div class="filter-group">
+                        <div class="filter-title">Addiction Risk Level</div>
+                        <label class="filter-option"><input type="checkbox" class="risk-filter" value="Low"> Low</label>
+                        <label class="filter-option"><input type="checkbox" class="risk-filter" value="Moderate"> Moderate</label>
+                        <label class="filter-option"><input type="checkbox" class="risk-filter" value="High"> High</label>
+                        <label class="filter-option"><input type="checkbox" class="risk-filter" value="Severe"> Severe</label>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-title">Age</div>
+                        <label class="filter-option"><input type="checkbox" class="age-filter" value="10-15"> 10 - 15</label>
+                        <label class="filter-option"><input type="checkbox" class="age-filter" value="16-21"> 16 - 21</label>
+                        <label class="filter-option"><input type="checkbox" class="age-filter" value="22-27"> 22 - 27</label>
+                        <label class="filter-option"><input type="checkbox" class="age-filter" value="28-35"> 28 - 35</label>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-title">Withdrawal Symptoms</div>
+                        <label class="filter-option"><input type="checkbox" class="withdrawal-filter" value="TRUE"> YES</label>
+                        <label class="filter-option"><input type="checkbox" class="withdrawal-filter" value="FALSE"> NO</label>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-title">Daily Gaming Hours</div>
+                        <label class="filter-option"><input type="checkbox" class="hours-filter" value="0-4"> 0 - 4</label>
+                        <label class="filter-option"><input type="checkbox" class="hours-filter" value="5-9"> 5 - 9</label>
+                        <label class="filter-option"><input type="checkbox" class="hours-filter" value="10-14"> 10 - 14</label>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-title">Continued Despite Problems</div>
+                        <label class="filter-option"><input type="checkbox" class="continued-filter" value="TRUE"> YES</label>
+                        <label class="filter-option"><input type="checkbox" class="continued-filter" value="FALSE"> NO</label>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-title">Loss of Other Interests</div>
+                        <label class="filter-option"><input type="checkbox" class="loss-filter" value="TRUE"> YES</label>
+                        <label class="filter-option"><input type="checkbox" class="loss-filter" value="FALSE"> NO</label>
+                    </div>
+                </div>
             </div>
 
-            <div class="metric-chip">
-              <div class="metric-chip-val">0.2709</div>
-              <div class="metric-chip-label">RMSE</div>
+            <div class="grid-2">
+              <div class="card chart-preview" onclick="openChart('riskDist')">
+                <div class="card-title">Distribution — Addiction Risk Level</div>
+                <div id="chart-risk-dist" style="height:220px"></div>
+              </div>
+              <div class="card chart-preview" onclick="openChart('hoursDist')">
+                <div class="card-title">Distribution — Daily Gaming Hours</div>
+                <div id="chart-hours-dist" style="height:220px"></div>
+              </div>
+              <div class="card chart-preview" onclick="openChart('isolation')">
+                <div class="card-title">Distribution — Social Isolation</div>
+                <div id="chart-genre" style="height:220px"></div>
+              </div>
+              <div class="card chart-preview" onclick="openChart('platform')">
+                <div class="card-title">Percentage of Gaming Platform Usage</div>
+                <div id="chart-platform" style="height:220px"></div>
+              </div>
+              <div class="card chart-preview" onclick="openChart('ageDist')">
+                <div class="card-title">Distribution — Player Age</div>
+                <div id="chart-age-dist" style="height:220px"></div>
+              </div>
+              <div class="card chart-preview" onclick="openChart('spendingDist')">
+                <div class="card-title">Distribution — Monthly Spending USD</div>
+                <div id="chart-spending-dist" style="height:220px"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== OBJ 1 ===== -->
+          <section id="obj1" class="section">
+            <div class="section-header">
+              <div class="section-tag">Objective 1 · Random Forest + Correlation</div>
+              <div class="section-title">Identify Influential Variables in Addiction Risk</div>
+              <p class="section-desc">Analysis of the relative importance of each variable and its correlation with addiction risk level using Random Forest and a correlation matrix.</p>
             </div>
 
-            <div class="metric-chip">
-              <div class="metric-chip-val">94.29%</div>
-              <div class="metric-chip-label">Accuracy</div>
+            <div class="grid-4" style="margin-bottom:1.5rem">
+              <div class="kpi-card">
+                <span class="kpi-label">Random Forest Accuracy</span>
+                <span class="kpi-value" style="color:var(--accent)">65%</span>
+                <span class="kpi-sub">With 4 variables · 200 test samples</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">daily_gaming_hours</span>
+                <span class="kpi-value" style="color:var(--accent2)">53%</span>
+                <span class="kpi-sub">Relative importance</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Max correlation</span>
+                <span class="kpi-value" style="color:var(--accent3)">0.81</span>
+                <span class="kpi-sub">daily_gaming_hours ↔ risk</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">sleep_hours ↔ risk</span>
+                <span class="kpi-value" style="color:var(--accent)">-0.61</span>
+                <span class="kpi-sub">Negative correlation</span>
+              </div>
             </div>
 
-          </div>
+            <div class="card col-span-2">
+              <div class="card-title">Correlation Heatmap — Objective 1 Variables</div>
+              <div id="chart-heatmap"></div>
+            </div>
 
-          <p style="font-size:0.65rem;color:var(--text3);margin-top:0.8rem;line-height:1.5">
-            ⚠️ This prediction is indicative only.
-            It does not replace professional mental health evaluation.
-            Model trained with 1,000 players.
-          </p>
+            <div class="grid-2">
+                <div class="card chart-preview" onclick="openChart('violin')">
+                    <div class="card-title">Distribution of Daily Gaming Hours by Addiction Risk Level</div>
+                    <div id="preview-violin"></div>
+                </div>
+                <div class="card chart-preview" onclick="openChart('withdrawal')">
+                    <div class="card-title">Withdrawal Symptoms by Addiction Risk Level</div>
+                    <div id="preview-withdrawal"></div>
+                </div>
+                <div class="card chart-preview" onclick="openChart('boxplot')">
+                    <div class="card-title">Social Isolation by Addiction Risk Level</div>
+                    <div id="preview-boxplot"></div>
+                </div>
+                <div class="card chart-preview" onclick="openChart('gamingIsolation')">
+                    <div class="card-title">Daily Gaming Hours by Social Isolation Level</div>
+                    <div id="preview-gaming-isolation"></div>
+                </div>
+            </div>
 
-        </div>
+            <div class="card col-span-2">
+              <div class="card">
+                <div class="card-title">Variable Importance — Random Forest</div>
+                <div id="chart-importance"></div>
+              </div>
+            </div>
+          </section>
 
-        <div id="result-empty" style="padding:3rem;text-align:center;color:var(--text3);font-size:0.8rem">
-          Complete the form and press<br>
-          "Calculate risk level" to see the result.
-        </div>
+          <!-- ===== OBJ 2 ===== -->
+          <section id="obj2" class="section">
+            <div class="section-header">
+              <div class="section-tag">Objective 2 · K-Means Clustering · K=4</div>
+              <div class="section-title">Player Segmentation by Physical and Mental Health</div>
+              <p class="section-desc">Four differentiated profiles identified using K-Means clustering. The selection of k=4 is justified by contextual coherence with addiction categories.</p>
+            </div>
 
-      </div>
+            <div class="grid-4" style="margin-bottom:1.5rem">
+              <div class="kpi-card">
+                <span class="kpi-label">Optimal Clusters</span>
+                <span class="kpi-value" style="color:var(--accent)">K = 4</span>
+                <span class="kpi-sub">Elbow method selection</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">High-Risk Cluster</span>
+                <span class="kpi-value" style="color:var(--accent)">Cluster 3</span>
+                <span class="kpi-sub">Severe deterioration profile</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Healthy Cluster</span>
+                <span class="kpi-value" style="color:var(--accent)">Cluster 0</span>
+                <span class="kpi-sub">Balanced lifestyle profile</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Most Influential Variable</span>
+                <span class="kpi-value" style="color:var(--purple)">Gaming Hours</span>
+                <span class="kpi-sub">Main segmentation factor</span>
+              </div>
+            </div>
 
-    </div>
+            <div class="viz-card">
+              <div class="chart-header">
+                <div class="chart-title">Optimal Number of Clusters — Elbow Method</div>
+              </div>
+              <div id="chart-elbow-method"></div>
+            </div>
 
-  </section>
+            <div class="cluster-grid" style="margin-bottom:1.5rem">
+
+              <!-- CLUSTER 0 -->
+              <div class="cluster-card">
+                <span class="cluster-badge" style="background:rgba(16,185,129,.12);color:var(--low)">Cluster 0</span>
+                <div class="cluster-name">Young Casual and Healthy Player</div>
+                <div class="cluster-stats">
+                  <div class="cstat"><span class="cstat-label">Gaming hours/day</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:27%;background:var(--low)"></div></div><span class="cstat-val">4.14h</span></div>
+                  <div class="cstat"><span class="cstat-label">Exercise/week</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:73%;background:var(--low)"></div></div><span class="cstat-val">8.00h</span></div>
+                  <div class="cstat"><span class="cstat-label">Social isolation</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:25%;background:var(--low)"></div></div><span class="cstat-val">2.50</span></div>
+                  <div class="cstat"><span class="cstat-label">Spending/month</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:18%;background:var(--low)"></div></div><span class="cstat-val">$51</span></div>
+                  <div class="cstat"><span class="cstat-label">Average risk</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:2%;background:var(--low)"></div></div><span class="cstat-val" style="color:var(--low)">0.02 Low</span></div>
+                </div>
+              </div>
+
+              <!-- CLUSTER 1 -->
+              <div class="cluster-card">
+                <span class="cluster-badge" style="background:rgba(234,179,8,.12);color:var(--moderate2)">Cluster 1</span>
+                <div class="cluster-name">Intermediate Player with Signs of Deterioration</div>
+                <div class="cluster-stats">
+                  <div class="cstat"><span class="cstat-label">Gaming hours/day</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:50%;background:var(--moderate)"></div></div><span class="cstat-val">7.53h</span></div>
+                  <div class="cstat"><span class="cstat-label">Exercise/week</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:57%;background:var(--moderate)"></div></div><span class="cstat-val">6.23h</span></div>
+                  <div class="cstat"><span class="cstat-label">Social isolation</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:48%;background:var(--moderate)"></div></div><span class="cstat-val">4.78</span></div>
+                  <div class="cstat"><span class="cstat-label">Spending/month</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:32%;background:var(--moderate)"></div></div><span class="cstat-val">$91</span></div>
+                  <div class="cstat"><span class="cstat-label">Average risk</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:34%;background:var(--moderate)"></div></div><span class="cstat-val" style="color:var(--moderate)">1.03 Moderate</span></div>
+                </div>
+              </div>
+
+              <!-- CLUSTER 2 -->
+              <div class="cluster-card">
+                <span class="cluster-badge" style="background:rgba(249,115,22,.12);color:var(--high)">Cluster 2</span>
+                <div class="cluster-name">Stable Veteran Player</div>
+                <div class="cluster-stats">
+                  <div class="cstat"><span class="cstat-label">Gaming hours/day</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:28%;background:var(--high)"></div></div><span class="cstat-val">4.16h</span></div>
+                  <div class="cstat"><span class="cstat-label">Exercise/week</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:72%;background:var(--high)"></div></div><span class="cstat-val">7.81h</span></div>
+                  <div class="cstat"><span class="cstat-label">Social isolation</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:26%;background:var(--high)"></div></div><span class="cstat-val">2.60</span></div>
+                  <div class="cstat"><span class="cstat-label">Spending/month</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:18%;background:var(--high)"></div></div><span class="cstat-val">$52</span></div>
+                  <div class="cstat"><span class="cstat-label">Average risk</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:2%;background:var(--high)"></div></div><span class="cstat-val" style="color:var(--high)">0.01 Low</span></div>
+                </div>
+              </div>
+
+              <!-- CLUSTER 3 -->
+              <div class="cluster-card">
+                <span class="cluster-badge" style="background:rgba(239,68,68,.12);color:var(--danger)">Cluster 3</span>
+                <div class="cluster-name">High-Risk Player — Severe Deterioration</div>
+                <div class="cluster-stats">
+                  <div class="cstat"><span class="cstat-label">Gaming hours/day</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:71%;background:var(--danger)"></div></div><span class="cstat-val">10.71h</span></div>
+                  <div class="cstat"><span class="cstat-label">Exercise/week</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:43%;background:var(--danger)"></div></div><span class="cstat-val">4.71h</span></div>
+                  <div class="cstat"><span class="cstat-label">Social isolation</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:70%;background:var(--danger)"></div></div><span class="cstat-val">6.96</span></div>
+                  <div class="cstat"><span class="cstat-label">Spending/month</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:91%;background:var(--danger)"></div></div><span class="cstat-val">$319</span></div>
+                  <div class="cstat"><span class="cstat-label">Average risk</span><div class="cstat-bar-wrap"><div class="cstat-bar" style="width:84%;background:var(--danger)"></div></div><span class="cstat-val" style="color:var(--danger)">2.51 High-Severe</span></div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="card">
+              <div class="card-title">Centroid Comparison by Variable</div>
+              <div id="cluster-filters" class="cluster-filters">
+                <button class="cluster-btn active" data-cluster="0">Balanced</button>
+                <button class="cluster-btn active" data-cluster="1">Moderate Risk</button>
+                <button class="cluster-btn active" data-cluster="2">Veteran Stable</button>
+                <button class="cluster-btn active" data-cluster="3">Severe Addiction</button>
+              </div>
+              <div id="chart-clusters"></div>
+            </div>
+          </section>
+
+          <!-- ===== OBJ 3 ===== -->
+          <section id="obj3" class="section">
+            <div class="section-header">
+              <div class="section-tag">OBJECTIVE 3 · MULTIPLE LINEAR REGRESSION</div>
+              <div class="section-title">Addiction Risk Level Estimation</div>
+              <p class="section-desc">Linear regression model trained with 6 predictive variables on 800 records and evaluated on 200 testing records.</p>
+            </div>
+
+            <div class="grid-4" style="margin-bottom:1.5rem">
+              <div class="kpi-card">
+                <span class="kpi-label">R² Score</span>
+                <span class="kpi-value" style="color:var(--accent3)">0.9429</span>
+                <span class="kpi-sub">Explained variability: 94.29%</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">MAE</span>
+                <span class="kpi-value" style="color:var(--accent)">0.2195</span>
+                <span class="kpi-sub">Mean absolute error</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">RMSE</span>
+                <span class="kpi-value" style="color:var(--accent2)">0.2709</span>
+                <span class="kpi-sub">Root mean square error</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Best predictor</span>
+                <span class="kpi-value" style="color:var(--purple);font-size:1rem">Withdrawal Symptoms</span>
+                <span class="kpi-sub">Coefficient: 0.988</span>
+              </div>
+            </div>
+
+            <div class="viz-card" style="margin-bottom:1.5rem">
+              <div class="chart-header">
+                <div class="chart-title">REGRESSION MODEL COEFFICIENTS</div>
+              </div>
+              <div id="chart-coef-full"></div>
+            </div>
+
+            <div class="grid-2">
+              <div class="viz-card">
+                <div class="chart-header">
+                  <div class="chart-title">RESIDUAL DISTRIBUTION</div>
+                </div>
+                <div id="chart-residuals"></div>
+              </div>
+              <div class="viz-card">
+                <div class="chart-header">
+                  <div class="chart-title">REAL VS PREDICTED VALUES</div>
+                </div>
+                <div id="chart-predictions"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== PREDICTOR ===== -->
+          <section id="predictor" class="section">
+            <div class="section-header">
+              <div class="section-tag">Deployment · Interactive Tool</div>
+              <div class="section-title">Addiction Risk Predictor</div>
+              <p class="section-desc">Enter your data to estimate your video game addiction risk level. Results are indicative and do not replace professional evaluation.</p>
+            </div>
+
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-title">Enter your data</div>
+                <div class="predictor-form">
+                  <div class="form-group">
+                    <label class="form-label">Daily gaming hours</label>
+                    <input class="form-input" id="p-hours" type="number" min="0.5" max="15" step="0.5" placeholder="ex: 5.5" oninput="validateNum(this,0.5,15)">
+                    <span class="form-hint">Range: 0.5 — 15 hours</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Sleep quality</label>
+                    <select class="form-select" id="p-sleep">
+                      <option value="">Select...</option>
+                      <option value="0">0 — Very poor</option>
+                      <option value="1">1 — Poor</option>
+                      <option value="2">2 — Fair</option>
+                      <option value="3">3 — Good</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Withdrawal symptoms?</label>
+                    <select class="form-select" id="p-withdrawal">
+                      <option value="">Select...</option>
+                      <option value="0">0 — No</option>
+                      <option value="1">1 — Yes</option>
+                    </select>
+                    <span class="form-hint">Irritability when unable to play</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Loss of other interests?</label>
+                    <select class="form-select" id="p-loss">
+                      <option value="">Select...</option>
+                      <option value="0">0 — No</option>
+                      <option value="1">1 — Yes</option>
+                    </select>
+                    <span class="form-hint">You stopped activities you previously enjoyed</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Continue despite problems?</label>
+                    <select class="form-select" id="p-continued">
+                      <option value="">Select...</option>
+                      <option value="0">0 — No</option>
+                      <option value="1">1 — Yes</option>
+                    </select>
+                    <span class="form-hint">You keep playing despite negative consequences</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Social isolation (1-10)</label>
+                    <input class="form-input" id="p-isolation" type="number" min="1" max="10" step="1" placeholder="ex: 4" oninput="validateNum(this,1,10)">
+                    <span class="form-hint">1 = not isolated · 10 = completely isolated</span>
+                  </div>
+                </div>
+                <button class="predict-btn" onclick="predict()">Calculate risk level</button>
+              </div>
+
+              <div class="card">
+                <div class="card-title">Prediction Result</div>
+                <div id="result-panel" class="result-panel">
+                  <div id="result-level" class="result-level"></div>
+                  <div id="result-score" class="result-score"></div>
+                  <div class="risk-meter">
+                    <div class="risk-bar-bg">
+                      <div id="risk-fill" class="risk-bar-fill"></div>
+                    </div>
+                    <div class="risk-labels">
+                      <span>Low</span><span>Moderate</span><span>High</span><span>Severe</span>
+                    </div>
+                  </div>
+                  <div id="result-msg" class="result-msg"></div>
+                  <div class="metrics-row">
+                    <div class="metric-chip"><div class="metric-chip-val">0.9429</div><div class="metric-chip-label">R²</div></div>
+                    <div class="metric-chip"><div class="metric-chip-val">0.2195</div><div class="metric-chip-label">MAE</div></div>
+                    <div class="metric-chip"><div class="metric-chip-val">0.2709</div><div class="metric-chip-label">RMSE</div></div>
+                    <div class="metric-chip"><div class="metric-chip-val">94.29%</div><div class="metric-chip-label">Accuracy</div></div>
+                  </div>
+                  <p style="font-size:0.65rem;color:var(--text3);margin-top:0.8rem;line-height:1.5">
+                    ⚠️ This prediction is indicative only. It does not replace professional mental health evaluation. Model trained with 1,000 players.
+                  </p>
+                </div>
+                <div id="result-empty" style="padding:3rem;text-align:center;color:var(--text3);font-size:0.8rem">
+                  Complete the form and press<br>"Calculate risk level" to see the result.
+                </div>
+              </div>
+            </div>
+          </section>
 
         </main>
 
-    </div>
+    </div><!-- end content-area -->
 
-</div>
+</div><!-- end layout -->
 
 <!-- ========================================================= -->
 <!-- CHART MODAL -->
 <!-- ========================================================= -->
-
 <div id="chart-modal" class="chart-modal hidden">
-
     <div class="chart-modal-content">
-
-        <!-- CLOSE BUTTON -->
-
-        <button id="close-modal">
-            ✕
-        </button>
-
-        <!-- DYNAMIC CHART -->
-
+        <button id="close-modal">✕</button>
         <div id="dynamic-chart"></div>
-
-        <!-- ANALYSIS SECTION -->
-
         <div id="chart-analysis"></div>
-
     </div>
-
 </div>
 
-  <div id="fullscreen-modal" class="chart-modal hidden">
+<div id="fullscreen-modal" class="chart-modal hidden">
     <div class="chart-modal-content">
         <button id="close-fullscreen-modal">✕</button>
         <div id="fullscreen-container" style="width:100%;min-height:700px"></div>
     </div>
-  </div>
+</div>
 
-  <script>
+<!-- ===== SIDEBAR TOGGLE JS ===== -->
+<script>
+const sidebarToggle = document.getElementById('sidebar-toggle');
+const sidebarInner  = document.getElementById('sidebar-inner');
+const overlay       = document.getElementById('sidebar-overlay');
 
-const sidebar =
+function openSidebar() {
+    sidebarInner.classList.add('open');
+    overlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+}
+function closeSidebar() {
+    sidebarInner.classList.remove('open');
+    overlay.classList.remove('visible');
+    document.body.style.overflow = '';
+}
 
-    document.querySelector('.sidebar');
-
-document.addEventListener('mousemove', e => {
-
-    if(e.clientX <= 28){
-
-        document.body.classList.remove(
-            'sidebar-hidden'
-        );
-
-    } else if(
-
-        !sidebar.matches(':hover')
-
-        &&
-
-        e.clientX > 320
-    ){
-
-        document.body.classList.add(
-            'sidebar-hidden'
-        );
-    }
+sidebarToggle.addEventListener('click', () => {
+    sidebarInner.classList.contains('open') ? closeSidebar() : openSidebar();
 });
+overlay.addEventListener('click', closeSidebar);
 
+/* Cierra el sidebar al seleccionar una sección en móvil */
+document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (window.innerWidth < 900) closeSidebar();
+    });
+});
 </script>
-
-
-
 
 <script src="/static/scripts.js?v=1"></script>
 
